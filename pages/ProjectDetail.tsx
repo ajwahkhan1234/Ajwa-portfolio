@@ -1,7 +1,8 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { PROJECTS } from '../constants';
+import { ProjectItem } from '../types';
 import { 
   ArrowLeft, 
   ExternalLink, 
@@ -19,13 +20,62 @@ import {
 } from 'lucide-react';
 import ScrollReveal from '../components/ScrollReveal';
 import OptimizedImage from '../components/OptimizedImage';
+import { db } from '../firebase';
+import { doc, getDoc } from 'firebase/firestore';
 
 const ProjectDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const projectIndex = PROJECTS.findIndex(p => p.id === id);
-  const project = PROJECTS[projectIndex];
+  const [project, setProject] = useState<ProjectItem | null>(null);
+  const [loading, setLoading] = useState(true);
   
-  const nextProject = PROJECTS[(projectIndex + 1) % PROJECTS.length];
+  useEffect(() => {
+    const fetchProject = async () => {
+      setLoading(true);
+      // First check static projects
+      const staticProject = PROJECTS.find(p => p.id === id);
+      if (staticProject) {
+        setProject(staticProject);
+        setLoading(false);
+        return;
+      }
+
+      // If not found, check Firestore
+      if (id) {
+        try {
+          const docRef = doc(db, 'projects', id);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            const data = docSnap.data();
+            setProject({
+              id: docSnap.id,
+              ...data,
+              techStack: data.technologies || []
+            } as ProjectItem);
+          }
+        } catch (error) {
+          console.error("Error fetching project from Firestore:", error);
+        }
+      }
+      setLoading(false);
+    };
+
+    fetchProject();
+  }, [id]);
+  
+  // For next project, we'll just use static for now or just the next in static list
+  const projectIndex = PROJECTS.findIndex(p => p.id === id);
+  const nextProject = projectIndex !== -1 
+    ? PROJECTS[(projectIndex + 1) % PROJECTS.length]
+    : PROJECTS[0];
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50">
+        <Loader2 className="w-12 h-12 text-primary animate-spin mb-4" />
+        <p className="text-slate-500 font-medium">Loading case study...</p>
+      </div>
+    );
+  }
 
   if (!project) {
     return (
@@ -98,7 +148,7 @@ const ProjectDetail: React.FC = () => {
 
             {/* Floating Tech Stack Chips (Desktop) */}
             <ScrollReveal delay={200} className="hidden lg:flex flex-wrap gap-3 justify-end items-center">
-              {project.techStack.map((tech, idx) => (
+              {project.techStack?.map((tech, idx) => (
                 <span 
                   key={tech} 
                   style={{ animationDelay: `${idx * 100}ms` }}
@@ -154,7 +204,7 @@ const ProjectDetail: React.FC = () => {
                 <span className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center">
                   <Code size={14} className="mr-2" /> Core Stack
                 </span>
-                <span className="text-lg font-bold text-slate-900">{project.techStack[0]} & More</span>
+                <span className="text-lg font-bold text-slate-900">{project.techStack?.[0] || "N/A"} & More</span>
               </div>
             </div>
           </ScrollReveal>

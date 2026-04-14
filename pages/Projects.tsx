@@ -1,18 +1,45 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { PROJECTS } from '../constants';
 import { ProjectItem } from '../types';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Loader2 } from 'lucide-react';
 import OptimizedImage from '../components/OptimizedImage';
+import { db } from '../firebase';
+import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 
 const Projects: React.FC = () => {
   const [filter, setFilter] = useState('All');
-  const categories = ['All', 'Web Apps', 'Websites', 'Branding'];
+  const [dynamicProjects, setDynamicProjects] = useState<ProjectItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const categories = ['All', 'Web Apps', 'Websites', 'Branding', 'Web Development', 'UI/UX Design', 'Mobile App'];
+
+  useEffect(() => {
+    const fetchDynamicProjects = async () => {
+      try {
+        const q = query(collection(db, 'projects'), orderBy('createdAt', 'desc'));
+        const querySnapshot = await getDocs(q);
+        const projects = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+          techStack: doc.data().technologies || [] // Map technologies to techStack for compatibility
+        })) as ProjectItem[];
+        setDynamicProjects(projects);
+      } catch (error) {
+        console.error("Error fetching dynamic projects:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDynamicProjects();
+  }, []);
+
+  const allProjects = [...dynamicProjects, ...PROJECTS];
 
   const filteredProjects = filter === 'All' 
-    ? PROJECTS 
-    : PROJECTS.filter(p => p.category === filter);
+    ? allProjects 
+    : allProjects.filter(p => p.category === filter);
 
   return (
     <div className="bg-slate-50 min-h-screen py-24">
@@ -42,9 +69,15 @@ const Projects: React.FC = () => {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {filteredProjects.map((project: ProjectItem) => (
-            <div key={project.id} className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-slate-100 flex flex-col">
+        {loading ? (
+          <div className="flex flex-col items-center justify-center py-20">
+            <Loader2 className="w-12 h-12 text-primary animate-spin mb-4" />
+            <p className="text-slate-500 font-medium">Loading projects...</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {filteredProjects.map((project: ProjectItem) => (
+              <div key={project.id} className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-slate-100 flex flex-col">
               <div className="relative h-60 bg-slate-100 overflow-hidden">
                 <OptimizedImage 
                   src={project.imageUrl} 
@@ -62,7 +95,7 @@ const Projects: React.FC = () => {
                 
                 <div className="mb-6 pt-6 border-t border-slate-100">
                   <div className="flex flex-wrap gap-2">
-                    {project.techStack.map(tech => (
+                    {project.techStack?.map(tech => (
                       <span key={tech} className="px-3 py-1 bg-indigo-50 text-primary text-xs font-semibold rounded-md">
                         {tech}
                       </span>
@@ -79,7 +112,8 @@ const Projects: React.FC = () => {
               </div>
             </div>
           ))}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );

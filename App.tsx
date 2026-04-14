@@ -12,6 +12,7 @@ import ProjectDetail from './pages/ProjectDetail';
 import SkillProofs from './pages/SkillProofs';
 import SkillDetail from './pages/SkillDetail';
 import DebugGame from './pages/DebugGame';
+import Dashboard from './pages/Dashboard';
 
 // ScrollToTop component to ensure scroll resets on route change
 const ScrollToTop = () => {
@@ -41,6 +42,7 @@ const App: React.FC = () => {
           <Route path="skills" element={<SkillProofs />} />
           <Route path="skills/:id" element={<SkillDetail />} />
           <Route path="debug" element={<DebugGame />} />
+          <Route path="dashboard" element={<Dashboard />} />
         </Route>
       </Routes>
     </HashRouter>

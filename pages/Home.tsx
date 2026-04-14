@@ -1,11 +1,14 @@
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Code, Layout, Monitor, ExternalLink, Sparkles, Search, Rocket, Star, Quote, ShieldCheck, Bug, Terminal } from 'lucide-react';
+import { ArrowRight, Code, Layout, Monitor, ExternalLink, Sparkles, Search, Rocket, Star, Quote, ShieldCheck, Bug, Terminal, Loader2 } from 'lucide-react';
 import { PERSONAL_INFO, PROJECTS, SKILLS_COLUMNS, PROCESS_STEPS, TESTIMONIALS, SKILL_PROOFS } from '../constants';
 import ScrollReveal from '../components/ScrollReveal';
 import ParticleBackground from '../components/ParticleBackground';
 import OptimizedImage from '../components/OptimizedImage';
+import { db } from '../firebase';
+import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore';
+import { ProjectItem } from '../types';
 
 // Tilt Card Component for "Wow" factor
 const ProjectCard: React.FC<{ project: any }> = ({ project }) => {
@@ -120,11 +123,36 @@ const TestimonialCard: React.FC<{ item: any }> = ({ item }) => (
 
 const Home: React.FC = () => {
   const [filter, setFilter] = useState('All');
-  const categories = ['All', 'Web Apps', 'Websites', 'Branding'];
+  const [dynamicProjects, setDynamicProjects] = useState<ProjectItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const categories = ['All', 'Web Apps', 'Websites', 'Branding', 'Web Development', 'UI/UX Design', 'Mobile App'];
+
+  useEffect(() => {
+    const fetchDynamicProjects = async () => {
+      try {
+        const q = query(collection(db, 'projects'), orderBy('createdAt', 'desc'), limit(6));
+        const querySnapshot = await getDocs(q);
+        const projects = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+          techStack: doc.data().technologies || []
+        })) as ProjectItem[];
+        setDynamicProjects(projects);
+      } catch (error) {
+        console.error("Error fetching dynamic projects:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDynamicProjects();
+  }, []);
+
+  const allProjects = [...dynamicProjects, ...PROJECTS];
 
   const filteredProjects = filter === 'All' 
-    ? PROJECTS.slice(0, 6) 
-    : PROJECTS.filter(p => p.category === filter).slice(0, 6);
+    ? allProjects.slice(0, 6) 
+    : allProjects.filter(p => p.category === filter).slice(0, 6);
 
   return (
     <div className="w-full overflow-hidden">
@@ -344,7 +372,12 @@ const Home: React.FC = () => {
           </ScrollReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 perspective-1000">
-            {filteredProjects.map((project, index) => (
+            {loading ? (
+              <div className="col-span-full flex flex-col items-center justify-center py-20">
+                <Loader2 className="w-12 h-12 text-primary animate-spin mb-4" />
+                <p className="text-slate-500 font-medium">Loading projects...</p>
+              </div>
+            ) : filteredProjects.map((project, index) => (
               <ScrollReveal key={project.id} delay={index * 100} className="h-full">
                 <ProjectCard project={project} />
               </ScrollReveal>
