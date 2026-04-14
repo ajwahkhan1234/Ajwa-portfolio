@@ -196,9 +196,9 @@ const ProjectDetail: React.FC = () => {
               </div>
               <div className="flex flex-col gap-1">
                 <span className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center">
-                  <Clock size={14} className="mr-2" /> Year
+                  <Clock size={14} className="mr-2" /> Date
                 </span>
-                <span className="text-lg font-bold text-slate-900">{project.year || "2024"}</span>
+                <span className="text-lg font-bold text-slate-900">{project.date || project.year || "2024"}</span>
               </div>
               <div className="flex flex-col gap-1">
                 <span className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center">

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Plus, Trash2, LogOut, Save, Image as ImageIcon, Link as LinkIcon, Type, FileText, Tag, Lock, LogIn } from 'lucide-react';
+import { Plus, Trash2, LogOut, Save, Image as ImageIcon, Link as LinkIcon, Type, FileText, Tag, Lock, LogIn, Edit2, X, Calendar, User, Briefcase, Target, Lightbulb, Trophy, Code } from 'lucide-react';
 import { db, auth } from '../firebase';
-import { collection, addDoc, getDocs, deleteDoc, doc, serverTimestamp, query, orderBy } from 'firebase/firestore';
+import { collection, addDoc, getDocs, deleteDoc, doc, serverTimestamp, query, orderBy, updateDoc } from 'firebase/firestore';
 import { signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from 'firebase/auth';
 
 interface Project {
@@ -14,6 +14,15 @@ interface Project {
   category: string;
   technologies?: string[];
   link?: string;
+  year?: string;
+  date?: string;
+  client?: string;
+  role?: string;
+  problem?: string;
+  solution?: string;
+  features?: string[];
+  results?: string[];
+  gallery?: string[];
   createdAt: any;
 }
 
@@ -24,8 +33,8 @@ const Dashboard: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [isAdding, setIsAdding] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
   const [authError, setAuthError] = useState<string | null>(null);
-  const [isOffline, setIsOffline] = useState(false);
   
   // Form State
   const [newProject, setNewProject] = useState({
@@ -35,18 +44,19 @@ const Dashboard: React.FC = () => {
     imageUrl: '',
     category: 'Web Development',
     technologies: '',
-    link: ''
+    link: '',
+    year: '',
+    date: '',
+    client: '',
+    role: '',
+    problem: '',
+    solution: '',
+    features: '',
+    results: '',
+    gallery: ['', '', '', '', '']
   });
 
   useEffect(() => {
-    // Check connection on mount
-    const checkConnection = async () => {
-      const { testFirestoreConnection } = await import('../firebase');
-      const connected = await testFirestoreConnection();
-      setIsOffline(!connected);
-    };
-    checkConnection();
-
     const unsubscribe = onAuthStateChanged(auth, (u) => {
       setUser(u);
       if (u) {
@@ -106,27 +116,94 @@ const Dashboard: React.FC = () => {
 
     try {
       const techArray = newProject.technologies.split(',').map(t => t.trim()).filter(t => t !== '');
-      await addDoc(collection(db, 'projects'), {
-        ...newProject,
+      const featuresArray = newProject.features.split(',').map(t => t.trim()).filter(t => t !== '');
+      const resultsArray = newProject.results.split(',').map(t => t.trim()).filter(t => t !== '');
+      const galleryArray = newProject.gallery.map(t => t.trim()).filter(t => t !== '');
+
+      const projectData = {
+        title: newProject.title,
+        description: newProject.description,
+        fullDescription: newProject.fullDescription,
+        imageUrl: newProject.imageUrl,
+        category: newProject.category,
+        link: newProject.link,
+        year: newProject.year,
+        date: newProject.date,
+        client: newProject.client,
+        role: newProject.role,
+        problem: newProject.problem,
+        solution: newProject.solution,
         technologies: techArray,
-        createdAt: serverTimestamp()
-      });
+        features: featuresArray,
+        results: resultsArray,
+        gallery: galleryArray,
+      };
+
+      if (editingId) {
+        await updateDoc(doc(db, 'projects', editingId), {
+          ...projectData,
+          updatedAt: serverTimestamp()
+        });
+      } else {
+        await addDoc(collection(db, 'projects'), {
+          ...projectData,
+          createdAt: serverTimestamp()
+        });
+      }
       
-      setNewProject({
-        title: '',
-        description: '',
-        fullDescription: '',
-        imageUrl: '',
-        category: 'Web Development',
-        technologies: '',
-        link: ''
-      });
+      resetForm();
       setIsAdding(false);
+      setEditingId(null);
       fetchProjects();
     } catch (error) {
-      console.error("Error adding project:", error);
-      alert("Failed to add project. Make sure you are logged in with the correct admin email.");
+      console.error("Error saving project:", error);
+      alert("Failed to save project. Make sure you are logged in with the correct admin email.");
     }
+  };
+
+  const resetForm = () => {
+    setNewProject({
+      title: '',
+      description: '',
+      fullDescription: '',
+      imageUrl: '',
+      category: 'Web Development',
+      technologies: '',
+      link: '',
+      year: '',
+      date: '',
+      client: '',
+      role: '',
+      problem: '',
+      solution: '',
+      features: '',
+      results: '',
+      gallery: ['', '', '', '', '']
+    });
+  };
+
+  const handleEditProject = (project: Project) => {
+    setNewProject({
+      title: project.title,
+      description: project.description,
+      fullDescription: project.fullDescription || '',
+      imageUrl: project.imageUrl,
+      category: project.category,
+      technologies: project.technologies?.join(', ') || '',
+      link: project.link || '',
+      year: project.year || '',
+      date: project.date || '',
+      client: project.client || '',
+      role: project.role || '',
+      problem: project.problem || '',
+      solution: project.solution || '',
+      features: project.features?.join(', ') || '',
+      results: project.results?.join(', ') || '',
+      gallery: [...(project.gallery || []), '', '', '', '', ''].slice(0, 5)
+    });
+    setEditingId(project.id);
+    setIsAdding(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleDeleteProject = async (id: string) => {
@@ -241,28 +318,24 @@ const Dashboard: React.FC = () => {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {isOffline && (
-          <div className="mb-8 p-4 bg-amber-50 border border-amber-100 rounded-2xl text-amber-800 flex items-center gap-3">
-            <div className="p-2 bg-amber-100 rounded-full">
-              <Lock className="w-5 h-5" />
-            </div>
-            <div>
-              <p className="font-bold">Connection Warning</p>
-              <p className="text-sm">Could not reach the database. Please check if an AdBlocker is blocking "firestore.googleapis.com" or try refreshing.</p>
-            </div>
-          </div>
-        )}
-
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <div>
             <h2 className="text-2xl font-bold text-slate-900">Projects</h2>
             <p className="text-slate-500">Manage your portfolio projects and case studies.</p>
           </div>
           <button 
-            onClick={() => setIsAdding(!isAdding)}
+            onClick={() => {
+              if (isAdding) {
+                setIsAdding(false);
+                setEditingId(null);
+                resetForm();
+              } else {
+                setIsAdding(true);
+              }
+            }}
             className="flex items-center justify-center gap-2 bg-primary text-white px-6 py-2.5 rounded-xl font-semibold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
           >
-            {isAdding ? 'Cancel' : <><Plus className="w-5 h-5" /> Add Project</>}
+            {isAdding ? <><X className="w-5 h-5" /> Cancel</> : <><Plus className="w-5 h-5" /> Add Project</>}
           </button>
         </div>
 
@@ -271,111 +344,278 @@ const Dashboard: React.FC = () => {
           <motion.div 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white p-6 rounded-2xl shadow-md border border-slate-100 mb-8"
+            className="bg-white p-8 rounded-3xl shadow-xl border border-slate-100 mb-12"
           >
-            <form onSubmit={handleAddProject} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1 flex items-center gap-2">
-                    <Type className="w-4 h-4" /> Project Title
-                  </label>
-                  <input 
-                    required
-                    type="text" 
-                    value={newProject.title}
-                    onChange={(e) => setNewProject({...newProject, title: e.target.value})}
-                    placeholder="e.g. Modern E-commerce Platform"
-                    className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1 flex items-center gap-2">
-                    <Tag className="w-4 h-4" /> Category
-                  </label>
-                  <select 
-                    value={newProject.category}
-                    onChange={(e) => setNewProject({...newProject, category: e.target.value})}
-                    className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
-                  >
-                    <option>Web Development</option>
-                    <option>UI/UX Design</option>
-                    <option>Mobile App</option>
-                    <option>Branding</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1 flex items-center gap-2">
-                    <ImageIcon className="w-4 h-4" /> Image URL
-                  </label>
-                  <input 
-                    required
-                    type="url" 
-                    value={newProject.imageUrl}
-                    onChange={(e) => setNewProject({...newProject, imageUrl: e.target.value})}
-                    placeholder="https://images.unsplash.com/..."
-                    className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1 flex items-center gap-2">
-                    <LinkIcon className="w-4 h-4" /> Project Link (Optional)
-                  </label>
-                  <input 
-                    type="url" 
-                    value={newProject.link}
-                    onChange={(e) => setNewProject({...newProject, link: e.target.value})}
-                    placeholder="https://example.com"
-                    className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
-                  />
+            <h3 className="text-xl font-bold mb-8 flex items-center gap-2">
+              {editingId ? <Edit2 className="w-6 h-6 text-primary" /> : <Plus className="w-6 h-6 text-primary" />}
+              {editingId ? 'Edit Project' : 'Add New Project'}
+            </h3>
+            
+            <form onSubmit={handleAddProject} className="space-y-10">
+              {/* Basic Info Section */}
+              <div className="space-y-6">
+                <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest">Basic Information</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2 flex items-center gap-2">
+                      <Type className="w-4 h-4" /> Project Title
+                    </label>
+                    <input 
+                      required
+                      type="text" 
+                      value={newProject.title}
+                      onChange={(e) => setNewProject({...newProject, title: e.target.value})}
+                      placeholder="e.g. Modern E-commerce Platform"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2 flex items-center gap-2">
+                      <Tag className="w-4 h-4" /> Category
+                    </label>
+                    <select 
+                      value={newProject.category}
+                      onChange={(e) => setNewProject({...newProject, category: e.target.value})}
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                    >
+                      <option>Web Development</option>
+                      <option>UI/UX Design</option>
+                      <option>Mobile App</option>
+                      <option>Branding</option>
+                      <option>Web Apps</option>
+                      <option>Websites</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2 flex items-center gap-2">
+                      <Calendar className="w-4 h-4" /> Year
+                    </label>
+                    <input 
+                      type="text" 
+                      value={newProject.year}
+                      onChange={(e) => setNewProject({...newProject, year: e.target.value})}
+                      placeholder="e.g. 2024"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2 flex items-center gap-2">
+                      <Calendar className="w-4 h-4" /> Specific Date
+                    </label>
+                    <input 
+                      type="text" 
+                      value={newProject.date}
+                      onChange={(e) => setNewProject({...newProject, date: e.target.value})}
+                      placeholder="e.g. March 2024"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                    />
+                  </div>
                 </div>
               </div>
-              
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1 flex items-center gap-2">
-                    <FileText className="w-4 h-4" /> Short Description
-                  </label>
-                  <textarea 
-                    required
-                    rows={2}
-                    value={newProject.description}
-                    onChange={(e) => setNewProject({...newProject, description: e.target.value})}
-                    placeholder="Briefly describe the project..."
-                    className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all resize-none"
-                  />
+
+              {/* Media & Links */}
+              <div className="space-y-6">
+                <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest">Media & Links</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2 flex items-center gap-2">
+                      <ImageIcon className="w-4 h-4" /> Main Image URL
+                    </label>
+                    <input 
+                      required
+                      type="url" 
+                      value={newProject.imageUrl}
+                      onChange={(e) => setNewProject({...newProject, imageUrl: e.target.value})}
+                      placeholder="https://images.unsplash.com/..."
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2 flex items-center gap-2">
+                      <LinkIcon className="w-4 h-4" /> Live Project Link
+                    </label>
+                    <input 
+                      type="url" 
+                      value={newProject.link}
+                      onChange={(e) => setNewProject({...newProject, link: e.target.value})}
+                      placeholder="https://example.com"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                    />
+                  </div>
                 </div>
+                
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1 flex items-center gap-2">
-                    <FileText className="w-4 h-4" /> Full Case Study (Markdown supported)
+                  <label className="block text-sm font-medium text-slate-700 mb-2 flex items-center gap-2">
+                    <ImageIcon className="w-4 h-4" /> Gallery Images (Up to 5 URLs)
                   </label>
-                  <textarea 
-                    rows={4}
-                    value={newProject.fullDescription}
-                    onChange={(e) => setNewProject({...newProject, fullDescription: e.target.value})}
-                    placeholder="Detailed description, challenges, solutions..."
-                    className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all resize-none"
-                  />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                    {newProject.gallery.map((url, idx) => (
+                      <input 
+                        key={idx}
+                        type="url" 
+                        value={url}
+                        onChange={(e) => {
+                          const newGallery = [...newProject.gallery];
+                          newGallery[idx] = e.target.value;
+                          setNewProject({...newProject, gallery: newGallery});
+                        }}
+                        placeholder={`Image ${idx + 1} URL`}
+                        className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                      />
+                    ))}
+                  </div>
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1 flex items-center gap-2">
-                    <Plus className="w-4 h-4" /> Technologies (Comma separated)
-                  </label>
-                  <input 
-                    type="text" 
-                    value={newProject.technologies}
-                    onChange={(e) => setNewProject({...newProject, technologies: e.target.value})}
-                    placeholder="React, Tailwind, Node.js"
-                    className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
-                  />
+              </div>
+
+              {/* Case Study Details */}
+              <div className="space-y-6">
+                <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest">Case Study Details</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2 flex items-center gap-2">
+                      <User className="w-4 h-4" /> Client Name
+                    </label>
+                    <input 
+                      type="text" 
+                      value={newProject.client}
+                      onChange={(e) => setNewProject({...newProject, client: e.target.value})}
+                      placeholder="e.g. Acme Corp"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2 flex items-center gap-2">
+                      <Briefcase className="w-4 h-4" /> My Role
+                    </label>
+                    <input 
+                      type="text" 
+                      value={newProject.role}
+                      onChange={(e) => setNewProject({...newProject, role: e.target.value})}
+                      placeholder="e.g. Lead UI/UX Designer"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                    />
+                  </div>
                 </div>
-                <div className="pt-2">
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2 flex items-center gap-2">
+                      <Target className="w-4 h-4" /> The Challenge (Problem)
+                    </label>
+                    <textarea 
+                      rows={3}
+                      value={newProject.problem}
+                      onChange={(e) => setNewProject({...newProject, problem: e.target.value})}
+                      placeholder="What was the main challenge?"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all resize-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2 flex items-center gap-2">
+                      <Lightbulb className="w-4 h-4" /> The Strategy (Solution)
+                    </label>
+                    <textarea 
+                      rows={3}
+                      value={newProject.solution}
+                      onChange={(e) => setNewProject({...newProject, solution: e.target.value})}
+                      placeholder="How did you solve it?"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all resize-none"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2 flex items-center gap-2">
+                      <Plus className="w-4 h-4" /> Core Features (Comma separated)
+                    </label>
+                    <textarea 
+                      rows={2}
+                      value={newProject.features}
+                      onChange={(e) => setNewProject({...newProject, features: e.target.value})}
+                      placeholder="Feature 1, Feature 2, Feature 3"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all resize-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2 flex items-center gap-2">
+                      <Trophy className="w-4 h-4" /> Results/Impact (Comma separated)
+                    </label>
+                    <textarea 
+                      rows={2}
+                      value={newProject.results}
+                      onChange={(e) => setNewProject({...newProject, results: e.target.value})}
+                      placeholder="Increased conversion by 20%, Reduced load time..."
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all resize-none"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Descriptions */}
+              <div className="space-y-6">
+                <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest">Descriptions & Tech</h4>
+                <div className="space-y-6">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2 flex items-center gap-2">
+                      <FileText className="w-4 h-4" /> Short Description (Card view)
+                    </label>
+                    <textarea 
+                      required
+                      rows={2}
+                      value={newProject.description}
+                      onChange={(e) => setNewProject({...newProject, description: e.target.value})}
+                      placeholder="Briefly describe the project for the listing card..."
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all resize-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2 flex items-center gap-2">
+                      <FileText className="w-4 h-4" /> Full Case Study Introduction
+                    </label>
+                    <textarea 
+                      rows={4}
+                      value={newProject.fullDescription}
+                      onChange={(e) => setNewProject({...newProject, fullDescription: e.target.value})}
+                      placeholder="Detailed introduction for the case study page..."
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all resize-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2 flex items-center gap-2">
+                      <Code className="w-4 h-4" /> Technologies (Comma separated)
+                    </label>
+                    <input 
+                      type="text" 
+                      value={newProject.technologies}
+                      onChange={(e) => setNewProject({...newProject, technologies: e.target.value})}
+                      placeholder="React, Tailwind, Node.js"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-6 border-t border-slate-100 flex gap-4">
+                <button 
+                  type="submit"
+                  className="flex-grow flex items-center justify-center gap-2 bg-primary text-white py-4 rounded-2xl font-bold hover:bg-primary/90 transition-all shadow-xl shadow-primary/20"
+                >
+                  <Save className="w-6 h-6" /> {editingId ? 'Update Project' : 'Publish Project'}
+                </button>
+                {editingId && (
                   <button 
-                    type="submit"
-                    className="w-full flex items-center justify-center gap-2 bg-slate-900 text-white py-3 rounded-xl font-semibold hover:bg-slate-800 transition-colors"
+                    type="button"
+                    onClick={() => {
+                      setEditingId(null);
+                      setIsAdding(false);
+                      resetForm();
+                    }}
+                    className="px-8 py-4 bg-slate-100 text-slate-600 rounded-2xl font-bold hover:bg-slate-200 transition-all"
                   >
-                    <Save className="w-5 h-5" /> Save Project
+                    Cancel
                   </button>
-                </div>
+                )}
               </div>
             </form>
           </motion.div>
@@ -404,7 +644,13 @@ const Dashboard: React.FC = () => {
                     alt={project.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute top-3 right-3">
+                  <div className="absolute top-3 right-3 flex gap-2">
+                    <button 
+                      onClick={() => handleEditProject(project)}
+                      className="p-2 bg-white/90 backdrop-blur-sm text-primary rounded-lg hover:bg-primary hover:text-white transition-all shadow-sm"
+                    >
+                      <Edit2 className="w-4 h-4" />
+                    </button>
                     <button 
                       onClick={() => handleDeleteProject(project.id)}
                       className="p-2 bg-white/90 backdrop-blur-sm text-red-600 rounded-lg hover:bg-red-600 hover:text-white transition-all shadow-sm"

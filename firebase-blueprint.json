@@ -26,6 +26,45 @@
           "type": "string",
           "description": "Project category (e.g., Web Development, UI/UX)"
         },
+        "year": {
+          "type": "string",
+          "description": "The year the project was completed"
+        },
+        "date": {
+          "type": "string",
+          "description": "Specific date or month (e.g., March 2024)"
+        },
+        "client": {
+          "type": "string",
+          "description": "The client for the project"
+        },
+        "role": {
+          "type": "string",
+          "description": "My role in the project"
+        },
+        "problem": {
+          "type": "string",
+          "description": "The challenge/problem statement"
+        },
+        "solution": {
+          "type": "string",
+          "description": "The strategy/solution implemented"
+        },
+        "features": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Key features of the project"
+        },
+        "results": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Measurable results or impact"
+        },
+        "gallery": {
+          "type": "array",
+          "items": { "type": "string", "format": "uri" },
+          "description": "Up to 5 additional image URLs"
+        },
         "technologies": {
           "type": "array",
           "items": {
