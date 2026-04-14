@@ -24,6 +24,7 @@ const Dashboard: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [isAdding, setIsAdding] = useState(false);
+  const [authError, setAuthError] = useState<string | null>(null);
   
   // Form State
   const [newProject, setNewProject] = useState({
@@ -75,11 +76,14 @@ const Dashboard: React.FC = () => {
   };
 
   const handleGoogleLogin = async () => {
+    setAuthError(null);
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Login failed:", error);
+      const domain = window.location.hostname;
+      setAuthError(`${error.message || "An unknown error occurred during login."} (Domain: ${domain})`);
     }
   };
 
@@ -180,6 +184,17 @@ const Dashboard: React.FC = () => {
           </div>
           <h1 className="text-2xl font-bold mb-2">Admin Authentication</h1>
           <p className="text-slate-500 mb-8">Sign in with your Google account to manage projects.</p>
+          
+          {authError && (
+            <div className="mb-6 p-4 bg-red-50 border border-red-100 rounded-xl text-red-600 text-sm text-left">
+              <p className="font-bold mb-1">Login Error:</p>
+              <p className="break-words">{authError}</p>
+              <p className="mt-2 text-xs opacity-80">
+                Tip: Ensure popups are allowed and that this domain is authorized in your Firebase console.
+              </p>
+            </div>
+          )}
+
           <button 
             onClick={handleGoogleLogin}
             className="w-full flex items-center justify-center gap-3 bg-white border border-slate-200 text-slate-700 py-3 rounded-xl font-semibold hover:bg-slate-50 transition-colors shadow-sm"
