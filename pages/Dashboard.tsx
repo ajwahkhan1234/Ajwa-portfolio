@@ -25,6 +25,7 @@ const Dashboard: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [isAdding, setIsAdding] = useState(false);
   const [authError, setAuthError] = useState<string | null>(null);
+  const [isOffline, setIsOffline] = useState(false);
   
   // Form State
   const [newProject, setNewProject] = useState({
@@ -38,6 +39,14 @@ const Dashboard: React.FC = () => {
   });
 
   useEffect(() => {
+    // Check connection on mount
+    const checkConnection = async () => {
+      const { testFirestoreConnection } = await import('../firebase');
+      const connected = await testFirestoreConnection();
+      setIsOffline(!connected);
+    };
+    checkConnection();
+
     const unsubscribe = onAuthStateChanged(auth, (u) => {
       setUser(u);
       if (u) {
@@ -232,6 +241,18 @@ const Dashboard: React.FC = () => {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {isOffline && (
+          <div className="mb-8 p-4 bg-amber-50 border border-amber-100 rounded-2xl text-amber-800 flex items-center gap-3">
+            <div className="p-2 bg-amber-100 rounded-full">
+              <Lock className="w-5 h-5" />
+            </div>
+            <div>
+              <p className="font-bold">Connection Warning</p>
+              <p className="text-sm">Could not reach the database. Please check if an AdBlocker is blocking "firestore.googleapis.com" or try refreshing.</p>
+            </div>
+          </div>
+        )}
+
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <div>
             <h2 className="text-2xl font-bold text-slate-900">Projects</h2>
