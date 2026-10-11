@@ -598,3 +598,8 @@ main > .intro::before { content: ''; position: absolute; inset: -60px 0 auto; he
 .header::before { content: ''; position: absolute; inset: 0; z-index: -1; background: rgba(10, 8, 9, 0.92); border-bottom: 1px solid rgba(246, 238, 242, 0.08); opacity: 0; transition: opacity 0.4s var(--ease); }
 .header.is-scrolled::before { opacity: 1; }
 .header.is-scrolled { color: #f6eef2; mix-blend-mode: normal; }
+
+/* Spam-trap field: off screen for people, still in the form for bots. */
+.contact-form .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.contact-form button:disabled { opacity: 0.6; cursor: progress; }
+.form-note a { color: var(--accent); }

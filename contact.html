@@ -23,6 +23,8 @@
         <label><span class="mono">Project type</span>
           <select name="type"><option>Website</option><option>Web app</option><option>SEO</option><option>WordPress</option><option>Something else</option></select>
         </label>
+        <!-- Spam trap: hidden from people, filled in by bots. -->
+        <label class="hp" aria-hidden="true">Company<input name="company" tabindex="-1" autocomplete="off" /></label>
         <label class="full"><span class="mono">Tell me about it</span><textarea name="message" rows="5" required></textarea></label>
         <button class="btn" type="submit" data-magnetic><span>Send message</span></button>
         <p class="form-note mono" aria-live="polite"></p>

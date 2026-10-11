@@ -649,17 +649,33 @@ function seoPage() {
 function contactPage() {
   const form = document.getElementById('contact-form');
   const note = form.querySelector('.form-note');
-  form.addEventListener('submit', (e) => {
+  const button = form.querySelector('button[type="submit"]');
+  const label = button.querySelector('span');
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!form.checkValidity()) {
       note.textContent = 'Please fill in your name, a valid email and a message.';
       form.reportValidity();
       return;
     }
-    const d = new FormData(form);
-    const body = `${d.get('message')}\n\n— ${d.get('name')} (${d.get('email')})`;
-    location.href = `mailto:${site.email}?subject=${encodeURIComponent(`${d.get('type')} enquiry`)}&body=${encodeURIComponent(body)}`;
-    note.textContent = 'Opening your email app…';
+    const data = { ...Object.fromEntries(new FormData(form)), page: location.pathname };
+    button.disabled = true;
+    label.textContent = 'Sending…';
+    note.textContent = '';
+    try {
+      const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+      const out = await res.json().catch(() => ({}));
+      if (!res.ok || !out.ok) throw new Error(out.error || 'Send failed');
+      form.reset();
+      label.textContent = 'Sent ✓';
+      note.textContent = 'Thanks. Your message is in my inbox and I’ll reply soon.';
+    } catch (err) {
+      label.textContent = 'Send message';
+      note.innerHTML = `${esc(err.message)} You can also email <a href="mailto:${site.email}">${site.email}</a>.`;
+    } finally {
+      button.disabled = false;
+      setTimeout(() => (label.textContent = 'Send message'), 4000);
+    }
   });
 }
 
