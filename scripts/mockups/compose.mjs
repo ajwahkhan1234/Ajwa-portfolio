@@ -22,6 +22,11 @@ const extras = {
   'review-engine': [`${home}/inovista-store/assets/review-engine-hero.png`],
   'blue-clover': [`${home}/blue-clover-build/test/shots-img/about-1440-elementor.png`, `${home}/blue-clover-build/test/shots-img/journal-1440-elementor.png`],
   'custom-product-filter': [],
+  // Real app screens from the promo-video captures.
+  quantum: ['imac-products', 'imac-months-aug-2026', 'imac-state-ca', 'imac-quarterly-annual', 'imac-return-in-annual', 'imac-upload'].map(
+    (n) => `${home}/maxvapor-tax/brag-output-2026-09-26-202649/composition/assets/screens/${n}.png`
+  ),
+  paypoint: ['clock', 'roster', 'team-map', 'timesheets', 'notes', 'weekend', 'summary'].map((n) => path.join(root, `scripts/mockups/extra/paypoint-${n}.png`)),
 };
 const uri = async (file, width) => 'data:image/jpeg;base64,' + (await sharp(file).resize({ width, withoutEnlargement: true }).jpeg({ quality: 88 }).toBuffer()).toString('base64');
 const exists = (f) => fs.existsSync(f) && f;
@@ -91,7 +96,9 @@ for (const p of all.filter((p) => !only.length || only.includes(p.slug))) {
   // Extra real images that exist for some projects (product art, build test captures).
   for (const [i, src] of (extras[p.slug] || []).entries()) {
     const name = `extra-${i + 1}.webp`;
-    await sharp(src).resize(1600, 1100, { fit: 'cover', position: 'top' }).webp({ quality: 80 }).toFile(`${dir}/${name}`);
+    const { width, height } = await sharp(src).metadata();
+    const img = height / width > 1.2 ? sharp(src).resize(1600, 1100, { fit: 'cover', position: 'top' }) : sharp(src).resize({ width: 1600, withoutEnlargement: true });
+    await img.webp({ quality: 82 }).toFile(`${dir}/${name}`);
     entry.gallery.push(`/work/${p.slug}/${name}`);
   }
   media[p.slug] = entry;

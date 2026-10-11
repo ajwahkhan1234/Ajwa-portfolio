@@ -2,7 +2,13 @@
  "quantum": {
   "cover": "/work/quantum/cover.webp",
   "gallery": [
-   "/work/quantum/screen.webp"
+   "/work/quantum/screen.webp",
+   "/work/quantum/extra-1.webp",
+   "/work/quantum/extra-2.webp",
+   "/work/quantum/extra-3.webp",
+   "/work/quantum/extra-4.webp",
+   "/work/quantum/extra-5.webp",
+   "/work/quantum/extra-6.webp"
   ],
   "mobile": "/work/quantum/mobile.webp"
  },
@@ -23,9 +29,15 @@
  "paypoint": {
   "cover": "/work/paypoint/cover.webp",
   "gallery": [
-   "/work/paypoint/screen.webp"
-  ],
-  "mobile": "/work/paypoint/mobile.webp"
+   "/work/paypoint/screen.webp",
+   "/work/paypoint/extra-1.webp",
+   "/work/paypoint/extra-2.webp",
+   "/work/paypoint/extra-3.webp",
+   "/work/paypoint/extra-4.webp",
+   "/work/paypoint/extra-5.webp",
+   "/work/paypoint/extra-6.webp",
+   "/work/paypoint/extra-7.webp"
+  ]
  },
  "route72": {
   "cover": "/work/route72/cover.webp",
