@@ -1,0 +1,41 @@
+{
+  "slug": "blanks-boutique",
+  "order": 1,
+  "clientName": "Blanks Boutique",
+  "websiteUrl": "https://www.blanksboutique.com/",
+  "industry": "E-commerce",
+  "sector": "ecommerce",
+  "market": "United States (nationwide)",
+  "duration": "SEO from launch to present",
+  "dataWindow": "Jun 30 – Sep 28, 2026",
+  "services": ["Technical SEO", "E-commerce SEO", "On-Page SEO", "Schema Markup", "Image SEO", "AEO / FAQ Content"],
+  "gsc": { "clicks": 35500, "clicksLabel": "35.5K", "impressions": 506000, "impressionsLabel": "506K", "ctr": 7, "position": 6.4 },
+  "headline": { "value": "35.5K", "label": "organic clicks in 3 months" },
+  "summary": "Blanks Boutique sells blank apparel (shirts, bodysuits, dresses, bibs) to crafters who personalise them with embroidery, sublimation, HTV and DTG. The SEO was built from the ground up: a keyword-led category architecture, rich product and FAQ structured data, and full image SEO across a 220-URL catalogue. In the last three months the store earned 35.5K organic clicks from 506K impressions at a 7% click-through rate, and daily clicks roughly tripled across the window.",
+  "highlightMetrics": [
+    { "label": "Organic Clicks", "value": "35.5K", "note": "Last 3 months" },
+    { "label": "Daily Clicks", "before": "≈250/day", "after": "≈750/day", "change": "≈3×", "note": "Start vs end of window, read from GSC chart" },
+    { "label": "Click-Through Rate", "value": "7.0%", "note": "Across 506K impressions" },
+    { "label": "Avg. Position", "value": "6.4", "note": "First page, on average" }
+  ],
+  "challenge": "Blank apparel is a crowded, price-driven niche where the big wholesalers dominate generic searches. The site runs on a custom cart with system-style URLs, so every ranking signal had to be built deliberately: category pages that match how crafters search (by decoration method and garment type), product data Google can read, and images that can be found in image search, where much of this audience shops.",
+  "approach": [
+    "Built the category architecture around crafter intent: decoration method (embroidery, sublimation, HTV, DTG) × garment type (Peter Pan collar shirts, bibs and burp cloths, bodysuits, dresses), plus a wholesale-supplier landing page.",
+    "Rewrote the homepage title and meta description around the core terms and the store's differentiators: \"Embroidery & Sublimation Blanks\", no minimums, no Tax ID required, trusted since 2012.",
+    "Implemented rich structured data: Product with Offer, OfferCatalog and ItemList for the catalogue, FAQPage for the blank-apparel Q&A section, WebSite with SearchAction, and Organization contact details.",
+    "Gave all 174 homepage images descriptive alt text and published a dedicated image sitemap covering 882 product images, alongside a 220-URL XML sitemap.",
+    "Added an answer-first \"Blank Apparel Questions, Answered\" FAQ block written for AI Overviews and featured snippets.",
+    "Added trust content (\"Why Crafters Choose Blanks Boutique\", partner logos, community impact) to lift click-through and conversion from organic visits."
+  ],
+  "results": [
+    "35.5K organic clicks and 506K impressions in the last three months (Jun 30 – Sep 28, 2026).",
+    "Daily clicks grew from roughly 250 to roughly 750 per day across the window, with impressions rising from roughly 3K to 8K per day.",
+    "A 7% average click-through rate, several times what a typical e-commerce site sees, driven by matched titles and rich results.",
+    "An average position of 6.4: the store ranks on page one on average across its full query set."
+  ],
+  "screenshots": [
+    { "src": "/assets/blanks-boutique/gsc-performance.jpg", "caption": "Google Search Console, last 3 months: 35.5K clicks, 506K impressions, 7% CTR, avg. position 6.4. Clicks climb steadily from July into late September." }
+  ],
+  "siteImage": "/assets/blanks-boutique/site.jpg",
+  "featured": true
+}

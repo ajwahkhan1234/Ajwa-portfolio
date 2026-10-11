@@ -1,0 +1,41 @@
+{
+  "slug": "bfp-law-firm",
+  "order": 4,
+  "clientName": "BFP Law Firm",
+  "websiteUrl": "https://bfplawfirm.com/",
+  "industry": "Law Firm",
+  "sector": "legal",
+  "market": "United States · Tennessee (54 counties)",
+  "duration": "SEO from launch to present",
+  "dataWindow": "Jun 30 – Sep 28, 2026",
+  "services": ["Local SEO", "Content Strategy", "Technical SEO", "On-Page SEO", "Schema Markup", "E-E-A-T"],
+  "gsc": { "clicks": 2730, "clicksLabel": "2.73K", "impressions": 311000, "impressionsLabel": "311K", "ctr": 0.9, "position": 12.2 },
+  "headline": { "value": "311K", "label": "impressions · ~2× daily by the end" },
+  "summary": "BFP Law Firm handles criminal defense, DUI, family law, adoption and personal injury across 54 Tennessee counties. The SEO build gave the firm a statewide footprint: 26 city landing pages, practice-area hubs, attorney profiles and a 120+ article legal content library. In the last three months the site earned 311K impressions and 2.73K clicks, with daily impressions roughly doubling across the window.",
+  "highlightMetrics": [
+    { "label": "Impressions", "value": "311K", "note": "Last 3 months" },
+    { "label": "Daily Impressions", "before": "≈3K/day", "after": "≈6K/day", "change": "≈2×", "note": "Start vs end of window, read from GSC chart" },
+    { "label": "Organic Clicks", "value": "2.73K", "note": "Last 3 months" },
+    { "label": "Avg. Position", "value": "12.2", "note": "Across 225+ indexed URLs" }
+  ],
+  "challenge": "Legal is one of the most competitive local-search verticals. A multi-practice firm serving 54 counties has to show up in dozens of separate city markets at once, for both \"lawyer near me\" searches and the urgent questions people search right after an arrest, a divorce filing or an accident. Without location-specific pages and trustworthy content, the firm would only ever rank around its office.",
+  "approach": [
+    "Built 26 city landing pages (Knoxville, Nashville, Johnson City, Kingsport, Bristol, Murfreesboro, Franklin, Clarksville, Sevierville, Maryville and more) to win local searches across the service area.",
+    "Created practice-area hubs for criminal defense, DUI, family law, adoption and personal injury (including auto accidents), linked from the city pages.",
+    "Published 120+ legal articles answering high-intent questions: Tennessee divorce filing, custody for unmarried parents, aggravated vs simple assault, DUI timelines, field sobriety tests, plea negotiation and expungement.",
+    "Strengthened E-E-A-T with attorney and staff profile pages, an About page, a Why Choose Us page and an FAQ.",
+    "Implemented LegalService and Organization schema with ContactPoint, and a title and meta description that state the practice areas, the 54-county coverage and the phone number.",
+    "Kept a steady publishing cadence: 104 articles updated in July 2026, with new posts published every month since."
+  ],
+  "results": [
+    "311K impressions and 2.73K organic clicks in the last three months.",
+    "Daily impressions roughly doubled, from about 3K to about 6K a day, between the start and end of the window.",
+    "Visibility now spans the firm's statewide service area rather than a single office location.",
+    "An average position of 12.2 across a 225+ URL site, with many pages on the edge of page one, which is the next growth lever."
+  ],
+  "screenshots": [
+    { "src": "/assets/bfp-law-firm/gsc-performance.jpg", "caption": "Google Search Console, last 3 months: 2.73K clicks, 311K impressions, 0.9% CTR, avg. position 12.2. Impressions (purple) trend upward into late September." }
+  ],
+  "siteImage": "/assets/bfp-law-firm/site.jpg",
+  "featured": true
+}

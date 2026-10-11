@@ -1,0 +1,39 @@
+{
+  "slug": "aqua-gym-swim-spas",
+  "order": 5,
+  "clientName": "AquaGym Swim Spas",
+  "websiteUrl": "https://aquagymswimspas.com/",
+  "industry": "Swim Spas",
+  "sector": "ecommerce",
+  "market": "United States · Tennessee",
+  "duration": "SEO from launch to present",
+  "dataWindow": "Jun 30 – Sep 28, 2026",
+  "services": ["Technical SEO", "On-Page SEO", "Site Architecture", "CRO"],
+  "gsc": { "clicks": 2580, "clicksLabel": "2.58K", "impressions": 339000, "impressionsLabel": "339K", "ctr": 0.8, "position": 10.4 },
+  "headline": { "value": "339K", "label": "impressions · avg. position 10.4" },
+  "summary": "AquaGym Swim Spas, sold through Aqua Living Factory Outlets, builds swim spas for swimming, exercise, hydrotherapy and relaxation. The SEO work organised the site around how buyers research a swim spa (by use case and by feature) and connected that research to pricing, financing and delivery pages. In the last three months the site earned 339K impressions and 2.58K clicks at an average position of 10.4.",
+  "highlightMetrics": [
+    { "label": "Impressions", "value": "339K", "note": "Last 3 months" },
+    { "label": "Organic Clicks", "value": "2.58K", "note": "Last 3 months" },
+    { "label": "Avg. Position", "value": "10.4", "note": "Page one, on average" },
+    { "label": "Indexed Pages", "value": "56", "note": "In the XML sitemap" }
+  ],
+  "challenge": "A swim spa is a considered purchase that buyers research for months, comparing brands on features, uses and price. The site needed to be found during that research phase, not just for the brand name, and then move visitors toward a pricing request or a financing application.",
+  "approach": [
+    "Built use-case pages for each reason people buy a swim spa: swimming, exercise, hydrotherapy and relaxation.",
+    "Created feature pages for the technology buyers compare: Swim Pro, Aqua Swim Bike, Balboa smart swim controls and CopPure filtration.",
+    "Built the conversion path into the architecture: pricing request, financing application (including Wells Fargo), rebate, and backyard, curbside and store-pickup delivery pages.",
+    "Added owner support content (owner's manuals, warranty, shipping and returns) to capture post-purchase searches.",
+    "Set up the Yoast sitemap index, canonical tags, and WebSite, WebPage, BreadcrumbList and SearchAction schema."
+  ],
+  "results": [
+    "339K impressions and 2.58K organic clicks in the last three months.",
+    "An average position of 10.4, with the site on page one on average for its query set.",
+    "A complete research-to-purchase path (use case → feature → pricing → financing → delivery), all indexable."
+  ],
+  "screenshots": [
+    { "src": "/assets/aqua-gym-swim-spas/gsc-performance.jpg", "caption": "Google Search Console, last 3 months: 2.58K clicks, 339K impressions, 0.8% CTR, avg. position 10.4." }
+  ],
+  "siteImage": "/assets/aqua-gym-swim-spas/site.jpg",
+  "featured": false
+}

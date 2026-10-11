@@ -1,0 +1,73 @@
+{
+  "slug": "chriss-pressure-washing",
+  "order": 6,
+  "clientName": "Chris's Pressure Washing",
+  "websiteUrl": "https://chrisspressurewashing.com/",
+  "industry": "Home Services",
+  "sector": "home-services",
+  "market": "United States · Tri-Cities, Tennessee",
+  "duration": "SEO from launch to present",
+  "dataWindow": "Jun 30 – Sep 28, 2026",
+  "services": [
+    "Local SEO",
+    "Content Strategy",
+    "On-Page SEO",
+    "Technical SEO"
+  ],
+  "gsc": {
+    "clicks": 168,
+    "clicksLabel": "168",
+    "impressions": 108000,
+    "impressionsLabel": "108K",
+    "ctr": 0.2,
+    "position": 37.6
+  },
+  "headline": {
+    "value": "108K",
+    "label": "impressions from a 185-URL content build"
+  },
+  "summary": "Chris's Pressure Washing is a residential and commercial exterior-cleaning company serving the Tri-Cities region of Tennessee. The SEO build created a service page for every job the company does and a large library of homeowner guides around them. Three months in, the site has reached 108K impressions in Google, and the work now is moving those pages up from page three and four onto page one.",
+  "highlightMetrics": [
+    {
+      "label": "Impressions",
+      "value": "108K",
+      "note": "Last 3 months"
+    },
+    {
+      "label": "Indexed URLs",
+      "value": "185",
+      "note": "96 pages + 89 posts in the sitemap"
+    },
+    {
+      "label": "Service Pages",
+      "value": "11",
+      "note": "One per service line"
+    },
+    {
+      "label": "Avg. Position",
+      "value": "37.6",
+      "note": "Climbing phase"
+    }
+  ],
+  "challenge": "Local home services is dominated by the map pack and by lead-gen directories. A single-location company had almost no organic footprint, so the first job was to give Google enough relevant, well-structured content to understand every service the business offers and the region it serves.",
+  "approach": [
+    "Built a service page for every line of work: house soft washing, roof cleaning, concrete cleaning and sealing, driveway sealing, deck and fence restoration, window cleaning, gutter cleaning and leaf removal, rust and graffiti removal, and commercial pressure washing.",
+    "Published 89 blog posts and dozens of guide pages answering homeowner questions, such as what power washing costs, how long to stay off sealed concrete, roof stains from algae and lichen, and gutter guards, each linked to the matching service.",
+    "Wrote a title and meta description targeting the Tri-Cities region with the residential and commercial service mix.",
+    "Organised the blog into 10 categories with a Rank Math sitemap index (pages, posts, categories) and Article, Person and WebSite schema."
+  ],
+  "results": [
+    "108K impressions in the last three months: Google is now showing the site across its service and question topics.",
+    "185 indexable URLs covering every service the company offers.",
+    "An average position of 37.6 marks the climbing phase; the next step is consolidating and internally linking the strongest pages to push them onto page one."
+  ],
+  "siteImage": "/assets/chriss-pressure-washing/site.jpg",
+  "featured": false,
+  "pendingScreenshots": [
+    {
+      "src": "/assets/chriss-pressure-washing/gsc-performance.png",
+      "caption": "Google Search Console, last 3 months: 168 clicks, 108K impressions, 0.2% CTR, avg. position 37.6."
+    }
+  ],
+  "screenshots": []
+}

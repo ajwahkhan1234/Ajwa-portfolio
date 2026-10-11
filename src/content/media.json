@@ -1,0 +1,428 @@
+{
+ "quantum": {
+  "cover": "/work/quantum/cover.webp",
+  "gallery": [
+   "/work/quantum/screen.webp"
+  ],
+  "mobile": "/work/quantum/mobile.webp"
+ },
+ "kendall-law": {
+  "cover": "/work/kendall-law/cover.webp",
+  "gallery": [
+   "/work/kendall-law/screen.webp"
+  ],
+  "mobile": "/work/kendall-law/mobile.webp"
+ },
+ "huddle": {
+  "cover": "/work/huddle/cover.webp",
+  "gallery": [
+   "/work/huddle/screen.webp"
+  ],
+  "mobile": "/work/huddle/mobile.webp"
+ },
+ "paypoint": {
+  "cover": "/work/paypoint/cover.webp",
+  "gallery": [
+   "/work/paypoint/screen.webp"
+  ],
+  "mobile": "/work/paypoint/mobile.webp"
+ },
+ "route72": {
+  "cover": "/work/route72/cover.webp",
+  "gallery": [
+   "/work/route72/screen.webp"
+  ],
+  "mobile": "/work/route72/mobile.webp"
+ },
+ "le-crazy-dubai": {
+  "cover": "/work/le-crazy-dubai/cover.webp",
+  "gallery": [
+   "/work/le-crazy-dubai/screen.webp"
+  ],
+  "mobile": "/work/le-crazy-dubai/mobile.webp"
+ },
+ "galliford-try": {
+  "cover": "/work/galliford-try/cover.webp",
+  "gallery": [
+   "/work/galliford-try/screen.webp"
+  ],
+  "mobile": "/work/galliford-try/mobile.webp"
+ },
+ "morgan-sindall": {
+  "cover": "/work/morgan-sindall/cover.webp",
+  "gallery": [
+   "/work/morgan-sindall/screen.webp"
+  ],
+  "mobile": "/work/morgan-sindall/mobile.webp"
+ },
+ "lavazza-usa": {
+  "cover": "/work/lavazza-usa/cover.webp",
+  "gallery": [
+   "/work/lavazza-usa/screen.webp"
+  ],
+  "mobile": "/work/lavazza-usa/mobile.webp"
+ },
+ "fm-group-uae": {
+  "cover": "/work/fm-group-uae/cover.webp",
+  "gallery": [
+   "/work/fm-group-uae/screen.webp"
+  ],
+  "mobile": "/work/fm-group-uae/mobile.webp"
+ },
+ "dnaar-properties": {
+  "cover": "/work/dnaar-properties/cover.webp",
+  "gallery": [
+   "/work/dnaar-properties/screen.webp"
+  ],
+  "mobile": "/work/dnaar-properties/mobile.webp"
+ },
+ "mirdef-shipping": {
+  "cover": "/work/mirdef-shipping/cover.webp",
+  "gallery": [
+   "/work/mirdef-shipping/screen.webp"
+  ],
+  "mobile": "/work/mirdef-shipping/mobile.webp"
+ },
+ "driverite-autos": {
+  "cover": "/work/driverite-autos/cover.webp",
+  "gallery": [
+   "/work/driverite-autos/screen.webp"
+  ],
+  "mobile": "/work/driverite-autos/mobile.webp"
+ },
+ "skin-artistry": {
+  "cover": "/work/skin-artistry/cover.webp",
+  "gallery": [
+   "/work/skin-artistry/screen.webp"
+  ],
+  "mobile": "/work/skin-artistry/mobile.webp"
+ },
+ "infinite-abilities": {
+  "cover": "/work/infinite-abilities/cover.webp",
+  "gallery": [
+   "/work/infinite-abilities/screen.webp"
+  ],
+  "mobile": "/work/infinite-abilities/mobile.webp"
+ },
+ "pope-firm": {
+  "cover": "/work/pope-firm/cover.webp",
+  "gallery": [
+   "/work/pope-firm/screen.webp"
+  ],
+  "mobile": "/work/pope-firm/mobile.webp"
+ },
+ "tommies-plumbing": {
+  "cover": "/work/tommies-plumbing/cover.webp",
+  "gallery": [
+   "/work/tommies-plumbing/screen.webp"
+  ],
+  "mobile": "/work/tommies-plumbing/mobile.webp"
+ },
+ "inovista-plugin-store": {
+  "cover": "/work/inovista-plugin-store/cover.webp",
+  "gallery": [
+   "/work/inovista-plugin-store/screen.webp"
+  ],
+  "mobile": "/work/inovista-plugin-store/mobile.webp"
+ },
+ "mia-vapes": {
+  "cover": "/work/mia-vapes/cover.webp",
+  "gallery": [
+   "/work/mia-vapes/screen.webp"
+  ],
+  "mobile": "/work/mia-vapes/mobile.webp"
+ },
+ "redhawk-vapes": {
+  "cover": "/work/redhawk-vapes/cover.webp",
+  "gallery": [
+   "/work/redhawk-vapes/screen.webp"
+  ],
+  "mobile": "/work/redhawk-vapes/mobile.webp"
+ },
+ "suorin-usa": {
+  "cover": "/work/suorin-usa/cover.webp",
+  "gallery": [
+   "/work/suorin-usa/screen.webp"
+  ],
+  "mobile": "/work/suorin-usa/mobile.webp"
+ },
+ "snack-shack": {
+  "cover": "/work/snack-shack/cover.webp",
+  "gallery": [
+   "/work/snack-shack/screen.webp"
+  ],
+  "mobile": "/work/snack-shack/mobile.webp"
+ },
+ "inovista-shield": {
+  "cover": "/work/inovista-shield/cover.webp",
+  "gallery": [
+   "/work/inovista-shield/screen.webp",
+   "/work/inovista-shield/extra-1.webp",
+   "/work/inovista-shield/extra-2.webp"
+  ]
+ },
+ "review-engine": {
+  "cover": "/work/review-engine/cover.webp",
+  "gallery": [
+   "/work/review-engine/screen.webp",
+   "/work/review-engine/extra-1.webp"
+  ]
+ },
+ "safe-remove": {
+  "cover": "/work/safe-remove/cover.webp",
+  "gallery": [
+   "/work/safe-remove/screen.webp"
+  ]
+ },
+ "custom-product-filter": {
+  "cover": "/work/custom-product-filter/cover.webp",
+  "gallery": [
+   "/work/custom-product-filter/screen.webp"
+  ]
+ },
+ "blue-clover": {
+  "cover": "/work/blue-clover/cover.webp",
+  "gallery": [
+   "/work/blue-clover/screen.webp",
+   "/work/blue-clover/extra-1.webp",
+   "/work/blue-clover/extra-2.webp"
+  ],
+  "mobile": "/work/blue-clover/mobile.webp"
+ },
+ "sturgill-ortho": {
+  "cover": "/work/sturgill-ortho/cover.webp",
+  "gallery": [
+   "/work/sturgill-ortho/screen.webp"
+  ]
+ },
+ "survey-intelligence": {
+  "cover": "/work/survey-intelligence/cover.webp",
+  "gallery": [
+   "/work/survey-intelligence/screen.webp"
+  ]
+ },
+ "client-finder": {
+  "cover": "/work/client-finder/cover.webp",
+  "gallery": [
+   "/work/client-finder/screen.webp"
+  ]
+ },
+ "rank-check": {
+  "cover": "/work/rank-check/cover.webp",
+  "gallery": [
+   "/work/rank-check/screen.webp"
+  ]
+ },
+ "seo-machine": {
+  "cover": "/work/seo-machine/cover.webp",
+  "gallery": [
+   "/work/seo-machine/screen.webp"
+  ]
+ },
+ "jarvis": {
+  "cover": "/work/jarvis/cover.webp",
+  "gallery": [
+   "/work/jarvis/screen.webp"
+  ]
+ },
+ "aqua-gym-swim-spas": {
+  "cover": "/work/aqua-gym-swim-spas/cover.webp",
+  "gallery": [
+   "/work/aqua-gym-swim-spas/gsc.webp",
+   "/work/aqua-gym-swim-spas/screen.webp"
+  ]
+ },
+ "bfp-law-firm": {
+  "cover": "/work/bfp-law-firm/cover.webp",
+  "gallery": [
+   "/work/bfp-law-firm/gsc.webp",
+   "/work/bfp-law-firm/screen.webp"
+  ],
+  "mobile": "/work/bfp-law-firm/mobile.webp"
+ },
+ "blanks-boutique": {
+  "cover": "/work/blanks-boutique/cover.webp",
+  "gallery": [
+   "/work/blanks-boutique/gsc.webp",
+   "/work/blanks-boutique/screen.webp"
+  ],
+  "mobile": "/work/blanks-boutique/mobile.webp"
+ },
+ "catalina-spas": {
+  "cover": "/work/catalina-spas/cover.webp",
+  "gallery": [
+   "/work/catalina-spas/screen.webp"
+  ],
+  "mobile": "/work/catalina-spas/mobile.webp"
+ },
+ "chriss-pressure-washing": {
+  "cover": "/work/chriss-pressure-washing/cover.webp",
+  "gallery": [
+   "/work/chriss-pressure-washing/screen.webp"
+  ]
+ },
+ "kincer-chassis": {
+  "cover": "/work/kincer-chassis/cover.webp",
+  "gallery": [
+   "/work/kincer-chassis/screen.webp"
+  ],
+  "mobile": "/work/kincer-chassis/mobile.webp"
+ },
+ "kendall-law-firm": {
+  "cover": "/work/kendall-law-firm/cover.webp",
+  "gallery": [
+   "/work/kendall-law-firm/screen.webp"
+  ],
+  "mobile": "/work/kendall-law-firm/mobile.webp"
+ },
+ "ravan-law": {
+  "cover": "/work/ravan-law/cover.webp",
+  "gallery": [
+   "/work/ravan-law/screen.webp"
+  ],
+  "mobile": "/work/ravan-law/mobile.webp"
+ },
+ "mirador-law": {
+  "cover": "/work/mirador-law/cover.webp",
+  "gallery": [
+   "/work/mirador-law/screen.webp"
+  ],
+  "mobile": "/work/mirador-law/mobile.webp"
+ },
+ "linc-biz": {
+  "cover": "/work/linc-biz/cover.webp",
+  "gallery": [
+   "/work/linc-biz/screen.webp"
+  ],
+  "mobile": "/work/linc-biz/mobile.webp"
+ },
+ "haugabrook-financial": {
+  "cover": "/work/haugabrook-financial/cover.webp",
+  "gallery": [
+   "/work/haugabrook-financial/screen.webp"
+  ],
+  "mobile": "/work/haugabrook-financial/mobile.webp"
+ },
+ "kitmiro": {
+  "cover": "/work/kitmiro/cover.webp",
+  "gallery": [
+   "/work/kitmiro/screen.webp"
+  ],
+  "mobile": "/work/kitmiro/mobile.webp"
+ },
+ "mhina-atelier": {
+  "cover": "/work/mhina-atelier/cover.webp",
+  "gallery": [],
+  "typographic": true
+ },
+ "bespoke-privacy-blinds": {
+  "cover": "/work/bespoke-privacy-blinds/cover.webp",
+  "gallery": [
+   "/work/bespoke-privacy-blinds/screen.webp"
+  ],
+  "mobile": "/work/bespoke-privacy-blinds/mobile.webp"
+ },
+ "crimson-clarke": {
+  "cover": "/work/crimson-clarke/cover.webp",
+  "gallery": [
+   "/work/crimson-clarke/screen.webp"
+  ],
+  "mobile": "/work/crimson-clarke/mobile.webp"
+ },
+ "time-gathering": {
+  "cover": "/work/time-gathering/cover.webp",
+  "gallery": [
+   "/work/time-gathering/screen.webp"
+  ],
+  "mobile": "/work/time-gathering/mobile.webp"
+ },
+ "greenways-nashville": {
+  "cover": "/work/greenways-nashville/cover.webp",
+  "gallery": [
+   "/work/greenways-nashville/screen.webp"
+  ],
+  "mobile": "/work/greenways-nashville/mobile.webp"
+ },
+ "hifsa-khan-salon": {
+  "cover": "/work/hifsa-khan-salon/cover.webp",
+  "gallery": [
+   "/work/hifsa-khan-salon/screen.webp"
+  ],
+  "mobile": "/work/hifsa-khan-salon/mobile.webp"
+ },
+ "jim-brantner-md": {
+  "cover": "/work/jim-brantner-md/cover.webp",
+  "gallery": [
+   "/work/jim-brantner-md/screen.webp"
+  ],
+  "mobile": "/work/jim-brantner-md/mobile.webp"
+ },
+ "colonial-merchant": {
+  "cover": "/work/colonial-merchant/cover.webp",
+  "gallery": [
+   "/work/colonial-merchant/screen.webp"
+  ],
+  "mobile": "/work/colonial-merchant/mobile.webp"
+ },
+ "prop-depot": {
+  "cover": "/work/prop-depot/cover.webp",
+  "gallery": [
+   "/work/prop-depot/screen.webp"
+  ],
+  "mobile": "/work/prop-depot/mobile.webp"
+ },
+ "tag-recreation": {
+  "cover": "/work/tag-recreation/cover.webp",
+  "gallery": [
+   "/work/tag-recreation/screen.webp"
+  ],
+  "mobile": "/work/tag-recreation/mobile.webp"
+ },
+ "political-harmony": {
+  "cover": "/work/political-harmony/cover.webp",
+  "gallery": [
+   "/work/political-harmony/screen.webp"
+  ],
+  "mobile": "/work/political-harmony/mobile.webp"
+ },
+ "americourt-hotels": {
+  "cover": "/work/americourt-hotels/cover.webp",
+  "gallery": [],
+  "typographic": true
+ },
+ "vape-closeouts": {
+  "cover": "/work/vape-closeouts/cover.webp",
+  "gallery": [
+   "/work/vape-closeouts/screen.webp"
+  ],
+  "mobile": "/work/vape-closeouts/mobile.webp"
+ },
+ "cmsc": {
+  "cover": "/work/cmsc/cover.webp",
+  "gallery": [
+   "/work/cmsc/screen.webp"
+  ],
+  "mobile": "/work/cmsc/mobile.webp"
+ },
+ "plastic-surgery-dr-marketing": {
+  "cover": "/work/plastic-surgery-dr-marketing/cover.webp",
+  "gallery": [
+   "/work/plastic-surgery-dr-marketing/screen.webp"
+  ],
+  "mobile": "/work/plastic-surgery-dr-marketing/mobile.webp"
+ },
+ "dragonfly-medical": {
+  "cover": "/work/dragonfly-medical/cover.webp",
+  "gallery": [
+   "/work/dragonfly-medical/screen.webp"
+  ],
+  "mobile": "/work/dragonfly-medical/mobile.webp"
+ },
+ "shopwolff-tanning-beds": {
+  "cover": "/work/shopwolff-tanning-beds/cover.webp",
+  "gallery": [
+   "/work/shopwolff-tanning-beds/screen.webp"
+  ],
+  "mobile": "/work/shopwolff-tanning-beds/mobile.webp"
+ }
+}

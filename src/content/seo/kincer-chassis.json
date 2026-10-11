@@ -1,0 +1,80 @@
+{
+  "slug": "kincer-chassis",
+  "order": 2,
+  "clientName": "Kincer Chassis",
+  "websiteUrl": "https://kincerchassis.com/",
+  "industry": "Automotive Manufacturing",
+  "sector": "automotive",
+  "market": "United States (national) · Louisville, Tennessee",
+  "duration": "SEO from launch to present",
+  "dataWindow": "Jun 30 – Sep 28, 2026",
+  "services": [
+    "Technical SEO",
+    "Content Strategy",
+    "On-Page SEO",
+    "Local SEO",
+    "Schema Markup",
+    "E-commerce SEO"
+  ],
+  "gsc": {
+    "clicks": 18100,
+    "clicksLabel": "18.1K",
+    "impressions": 930000,
+    "impressionsLabel": "930K",
+    "ctr": 1.9,
+    "position": 5.2
+  },
+  "headline": {
+    "value": "930K",
+    "label": "impressions · avg. position 5.2"
+  },
+  "summary": "Kincer Chassis builds Ford-licensed Early Bronco chassis, replacement frames and 1965–1979 Ford truck 4WD conversion kits in Louisville, Tennessee. The SEO programme combined a tight product-page structure with a 55-article content library aimed at Bronco and classic-truck builders. In the last three months the site earned 930K impressions and 18.1K clicks at an average position of 5.2.",
+  "highlightMetrics": [
+    {
+      "label": "Impressions",
+      "value": "930K",
+      "note": "Last 3 months"
+    },
+    {
+      "label": "Organic Clicks",
+      "value": "18.1K",
+      "note": "Last 3 months"
+    },
+    {
+      "label": "Avg. Position",
+      "value": "5.2",
+      "note": "Top-5 on average"
+    },
+    {
+      "label": "Daily Clicks",
+      "before": "≈135/day",
+      "after": "≈180/day",
+      "change": "+≈33%",
+      "note": "Start vs end of window, read from GSC chart"
+    }
+  ],
+  "challenge": "Kincer sells high-ticket, highly specific products to a national enthusiast audience. Buyers research for weeks before buying a chassis, so the site needed to rank both for commercial product terms (Early Bronco chassis, frames, 4WD conversion kits) and for the long tail of build questions, such as engine swaps, roll cages, bumpers and restoration, that lead those buyers to a builder.",
+  "approach": [
+    "Rewrote the homepage title and meta description around the money terms: \"Early Bronco Chassis & Ford Truck 4WD Kits\", Ford-licensed, Louisville TN near Knoxville.",
+    "Structured the product range into dedicated, indexable pages: Classic Series and Builder Series chassis, coil-over rolling chassis, custom frames, rear sway bar, Coyote motor mounts, fuel tanks and electric power steps.",
+    "Built a 55-post content library on Bronco and truck build topics (Coyote Gen 4X and Gen 3 swaps, Cummins R2.8, Godzilla 7.3L, roll cages, bumper installs, restoration and buyer's guides) and linked it into the product pages.",
+    "Added local and entity signals: Place and PostalAddress schema, a dedicated local sitemap, a plan-a-visit page and a show-schedule page.",
+    "Implemented Article, Person and WebSite schema through Rank Math, with a clean sitemap index (pages, posts, local).",
+    "Used earned press (\"See Kincer Chassis Featured in\", the Jay Leno Early Bronco build) as on-page authority and internal-link hubs."
+  ],
+  "results": [
+    "930K impressions and 18.1K organic clicks in the last three months.",
+    "An average position of 5.2 across all queries: the site sits in the top five on average.",
+    "Daily clicks rose from roughly 135 to roughly 180 across the window, with spikes above 400 clicks/day when build content broke out.",
+    "Organic visibility is national, not just local, which matches a product that ships to builders across the US."
+  ],
+  "siteImage": "/assets/kincer-chassis/site.jpg",
+  "featured": true,
+  "pendingScreenshots": [
+    {
+      "src": "/assets/kincer-chassis/gsc-performance.png",
+      "caption": "Google Search Console, last 3 months: 18.1K clicks, 930K impressions, 1.9% CTR, avg. position 5.2."
+    }
+  ],
+  "screenshots": []
+}

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 186" role="img" aria-label="Maximum Vapor">
+  <rect width="640" height="186" fill="#0b0b0f"/>
+  <g transform="translate(36 38)">
+    <path d="M0 110 L0 0 L55 62 L110 0 L110 110" fill="none" stroke="#ff4f9a" stroke-width="16" stroke-linejoin="round"/>
+    <path d="M28 110 Q55 78 82 110" fill="none" stroke="#ffd1e6" stroke-width="8" stroke-linecap="round" opacity=".8"/>
+  </g>
+  <text x="178" y="92" font-family="Inter Tight, Helvetica, Arial, sans-serif" font-size="54" font-weight="800" letter-spacing="-1.5" fill="#fff">MAXIMUM</text>
+  <text x="180" y="140" font-family="JetBrains Mono, Menlo, monospace" font-size="34" font-weight="600" letter-spacing="14" fill="#ff4f9a">VAPOR</text>
+</svg>

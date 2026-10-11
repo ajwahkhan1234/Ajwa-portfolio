@@ -1,0 +1,76 @@
+{
+  "slug": "catalina-spas",
+  "order": 3,
+  "clientName": "Catalina Spas",
+  "websiteUrl": "https://catalinaspas.com/",
+  "industry": "Hot Tubs & Swim Spas",
+  "sector": "ecommerce",
+  "market": "United States · Tennessee",
+  "duration": "SEO from launch to present",
+  "dataWindow": "Jun 30 – Sep 28, 2026",
+  "services": [
+    "Technical SEO",
+    "E-commerce SEO",
+    "On-Page SEO",
+    "Image SEO",
+    "CRO"
+  ],
+  "gsc": {
+    "clicks": 7700,
+    "clicksLabel": "7.7K",
+    "impressions": 125000,
+    "impressionsLabel": "125K",
+    "ctr": 6.2,
+    "position": 10
+  },
+  "headline": {
+    "value": "6.2%",
+    "label": "CTR on 7.7K organic clicks"
+  },
+  "summary": "Catalina Spas is a hot tub and swim spa brand with a compact WooCommerce catalogue of named models (Berkshire, Nantucket, Hampton, Carlton, Armstrong, Kennedy). SEO focused on making a small site work hard: clean indexation, strong model pages and a high-intent audience. The result is 7.7K organic clicks in three months at a 6.2% click-through rate, with roughly 100 clicks a day held steady across the period.",
+  "highlightMetrics": [
+    {
+      "label": "Organic Clicks",
+      "value": "7.7K",
+      "note": "Last 3 months"
+    },
+    {
+      "label": "Click-Through Rate",
+      "value": "6.2%",
+      "note": "On 125K impressions"
+    },
+    {
+      "label": "Avg. Position",
+      "value": "10",
+      "note": "Page one, on average"
+    },
+    {
+      "label": "Daily Clicks",
+      "value": "≈100/day",
+      "note": "Held steady through the window"
+    }
+  ],
+  "challenge": "With only around 35 indexable URLs, Catalina competes against national hot tub brands and big-box retailers that have hundreds of pages. The site could not win on volume, so every page had to rank for the searches that turn into showroom visits and quote requests: brand and model names, swim spa and hot tub benefits, and buyer research.",
+  "approach": [
+    "Set up a clean Yoast sitemap index covering pages, products, product categories and the 3D flip-book brochure, and kept thin template URLs out of the index.",
+    "Built a dedicated, indexable WooCommerce page for each model (Berkshire, Nantucket, Hampton, Carlton, Armstrong, Kennedy) under a single shop hub.",
+    "Wrote benefit-led homepage sections matched to research queries: stress relief, muscle pain and tightness, detox, and the Catalina Swim Spas line.",
+    "Gave every homepage image descriptive alt text and ImageObject markup, plus WebSite, WebPage and BreadcrumbList schema.",
+    "Brought the full product brochure on-site as a crawlable 3D flip-book rather than a PDF dead end."
+  ],
+  "results": [
+    "7.7K organic clicks from 125K impressions in the last three months.",
+    "A 6.2% click-through rate: searchers who see Catalina in results click at a high rate.",
+    "Clicks held at roughly 100 a day through the window, even as Google showed the site for fewer low-relevance queries (impressions dropped in early July while clicks did not).",
+    "An average position of 10, keeping the brand on page one for its core queries."
+  ],
+  "siteImage": "/assets/catalina-spas/site.jpg",
+  "featured": true,
+  "pendingScreenshots": [
+    {
+      "src": "/assets/catalina-spas/gsc-performance.png",
+      "caption": "Google Search Console, last 3 months: 7.7K clicks, 125K impressions, 6.2% CTR, avg. position 10."
+    }
+  ],
+  "screenshots": []
+}

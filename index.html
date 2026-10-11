@@ -1,145 +1,117 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ajwah Malik | Full-Stack Developer & UI/UX Designer</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%234f46e5%22/><text x=%2250%22 y=%2270%22 font-family=%22sans-serif%22 font-size=%2270%22 font-weight=%22bold%22 fill=%22white%22 text-anchor=%22middle%22>A</text></svg>" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              primary: '#4f46e5', // Indigo 600
-              secondary: '#0f172a', // Slate 900
-              accent: '#8b5cf6', // Violet 500
-            },
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-            },
-            animation: {
-              'float': 'float 6s ease-in-out infinite',
-              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-              'blob': 'blob 7s infinite',
-              'marquee': 'marquee 40s linear infinite',
-            },
-            keyframes: {
-              float: {
-                '0%, 100%': { transform: 'translateY(0)' },
-                '50%': { transform: 'translateY(-20px)' },
-              },
-              blob: {
-                '0%': { transform: 'translate(0px, 0px) scale(1)' },
-                '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-                '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-                '100%': { transform: 'translate(0px, 0px) scale(1)' },
-              },
-              marquee: {
-                '0%': { transform: 'translateX(0)' },
-                '100%': { transform: 'translateX(-50%)' },
-              }
-            }
-          },
-        },
-      }
-    </script>
-    <style>
-      /* Smooth scrolling for the whole document */
-      html {
-        scroll-behavior: smooth;
-        /* cursor: none; Removed to show default cursor */
-      }
-      
-      /* GLOBAL SCALE ADJUSTMENT: Makes the site feel "zoomed out" on desktop */
-      @media (min-width: 1024px) {
-        html {
-          font-size: 14px; /* Standard is 16px. Reducing to 14px scales down 1rem units. */
-        }
-      }
-      
-      /* Restore slightly for very large screens */
-      @media (min-width: 1920px) {
-        html {
-          font-size: 16px;
-        }
-      }
-
-      body {
-        background-color: #f8fafc;
-        color: #1e293b;
-        overflow-x: hidden;
-      }
-      
-      /* Mobile fallback for cursor */
-      @media (pointer: coarse) {
-        html {
-          cursor: auto;
-        }
-      }
-
-      /* Custom Scrollbar */
-      ::-webkit-scrollbar {
-        width: 10px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #f1f5f9;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #cbd5e1;
-        border-radius: 5px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #94a3b8;
-      }
-
-      /* Utility for 3D Tilt */
-      .tilt-card {
-        transition: transform 0.1s ease-out;
-        transform-style: preserve-3d;
-      }
-      
-      /* Reveal Animation Classes */
-      .reveal-hidden {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
-      }
-      .reveal-visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      
-      /* Gradient Text Utility */
-      .text-gradient {
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-image: linear-gradient(45deg, #4f46e5, #8b5cf6, #ec4899);
-      }
-
-      /* Mask for Marquee */
-      .mask-gradient {
-        mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-        -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-      }
-    </style>
-  <script type="importmap">
-{
-  "imports": {
-    "react": "https://aistudiocdn.com/react@^19.2.1",
-    "react-dom": "https://aistudiocdn.com/react-dom@^19.2.1",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
-    "react/": "https://aistudiocdn.com/react@^19.2.1/",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.559.0",
-    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.10.1",
-    "framer-motion": "https://esm.sh/framer-motion@11.0.8?external=react,react-dom"
-  }
-}
-</script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ajwa Malik — Developer & SEO Engineer</title>
+  <meta name="description" content="Ajwa Malik builds fast websites, web apps and WordPress products, and fixes the SEO underneath them." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23ff4f9a'/%3E%3C/svg%3E" />
 </head>
-  <body>
-    <div id="root"></div>
-  <script type="module" src="/index.tsx"></script>
+<body data-page="home">
+  <main id="page">
+    <section class="hero" data-theme="dark">
+      <div class="hero-bg" id="hero-bg" aria-hidden="true"></div>
+      <div class="hero-glow" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="hero-inner wrap">
+        <div class="hero-upper">
+          <div class="hero-info mono">
+            <ul>
+              <li>Websites</li><li>Web apps</li><li>WordPress plugins</li><li>Technical SEO</li><li>AI tooling</li>
+            </ul>
+            <ul>
+              <li>Next.js</li><li>React</li><li>Node.js</li><li>WordPress</li><li>Shopify</li>
+            </ul>
+            <ul class="hero-contact">
+              <li class="hero-status"><i class="dot"></i>Available for new projects</li>
+              <li>6 years · 60+ projects</li>
+              <li>US · UK · Canada · UAE clients</li>
+              <li><a href="/contact.html">Say hello &#8599;</a></li>
+            </ul>
+          </div>
+          <div class="hero-case" id="hero-case"></div>
+        </div>
+        <p class="hero-descr"><strong>Full-stack developer &amp; SEO engineer.</strong> <span>I build fast websites, web apps and WordPress plugins, then get them found on Google.</span></p>
+        <h1 class="hero-name">
+          <a href="/contact.html" data-cursor="Let&#8217;s chat" aria-label="Ajwa Malik, developer and SEO engineer. Get in touch">
+            <span class="hero-name-fit" data-chars>AJWA MALIK</span>
+          </a>
+        </h1>
+      </div>
+    </section>
+    <section class="intro wrap">
+      <p class="mono label" data-reveal>(01) Approach</p>
+      <h2 class="statement" data-scrub>I write code, design and SEO together, so a site launches fast, readable to search engines and easy for its owner to edit.</h2>
+    </section>
+
+    <section class="expand" aria-label="Showcase">
+      <div class="expand-pin">
+        <div class="expand-frame">
+          <canvas class="shader-canvas" aria-hidden="true"></canvas>
+          <div class="expand-copy">
+            <p class="mono">Built to move</p>
+            <p class="expand-title">Motion, code and search, built to work together.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="marquees" aria-label="Tools">
+      <div class="marquee" data-dir="1"><div class="marquee-track" data-items="Next.js,React,Three.js,GSAP,WordPress,Elementor,Shopify,Medusa"></div></div>
+      <div class="marquee is-outline" data-dir="-1"><div class="marquee-track" data-items="Technical SEO,Core Web Vitals,Schema,Indexing,Malware recovery,Automation"></div></div>
+    </section>
+
+    <section class="hscroll" id="work" aria-label="Selected work">
+      <div class="hscroll-pin">
+        <div class="hscroll-head wrap">
+          <p class="mono label">(02) Selected work</p>
+          <p class="hscroll-count mono"><span data-hcount>01</span> / <span data-htotal>08</span></p>
+        </div>
+        <div class="hscroll-track" id="hscroll-track"></div>
+        <div class="hscroll-bar wrap"><i></i></div>
+      </div>
+    </section>
+
+    <section class="process" aria-label="Process">
+      <div class="process-pin wrap">
+        <p class="mono label">(03) How I work</p>
+        <div class="process-stage">
+          <div class="process-counter" aria-hidden="true">
+            <div class="process-digits"><span>01</span><span>02</span><span>03</span><span>04</span></div>
+          </div>
+          <ol class="process-steps">
+            <li><h3>Diagnose</h3><p>Before touching anything, I find out what is actually wrong: crawl logs, network traces, database rows, server files.</p></li>
+            <li><h3>Measure</h3><p>I put a number on the problem so the fix can be checked against it, not argued about.</p></li>
+            <li><h3>Build</h3><p>I build the smallest thing that fixes it properly, then test it against the real site, not only a mock.</p></li>
+            <li><h3>Hand over</h3><p>I write documentation and build editing tools so the owner can run it without me.</p></li>
+          </ol>
+        </div>
+        <div class="process-progress"><i></i></div>
+      </div>
+    </section>
+
+    <section class="career wrap" aria-label="Career">
+      <div class="section-head career-head">
+        <p class="mono label" data-reveal>(04) Career</p>
+        <a class="link-arrow" href="/experience.html" data-reveal>Full experience</a>
+      </div>
+      <h2 class="career-title" data-split>Where I&#8217;ve worked</h2>
+      <div class="career-list" id="career-list"></div>
+    </section>
+
+    <section class="services wrap">
+      <p class="mono label" data-reveal>(05) What I do</p>
+      <div class="service-list" id="services"></div>
+    </section>
+
+    <section class="toolbox wrap" aria-label="Toolbox">
+      <p class="mono label" data-reveal>(06) Toolbox</p>
+      <ul class="tool-grid" id="tool-grid"></ul>
+    </section>
+
+  </main>
+  <script type="module" src="/src/main.js"></script>
 </body>
 </html>

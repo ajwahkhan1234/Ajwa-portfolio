@@ -1,26 +1,18 @@
 {
-  "name": "ajwah-malik-portfolio",
+  "name": "ajwa-malik-portfolio",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview",
-    "lint": "tsc --noEmit"
+    "preview": "vite preview"
   },
   "dependencies": {
-    "firebase": "^12.12.0",
-    "framer-motion": "11.0.8",
-    "lucide-react": "^0.559.0",
-    "react": "^19.2.1",
-    "react-dom": "^19.2.1",
-    "react-router-dom": "^7.10.1"
+    "gsap": "3.12.5",
+    "lenis": "1.1.13"
   },
   "devDependencies": {
-    "@types/node": "^22.14.0",
-    "@vitejs/plugin-react": "^5.0.0",
-    "typescript": "~5.8.2",
-    "vite": "^6.2.0"
+    "vite": "5.4.10"
   }
 }
