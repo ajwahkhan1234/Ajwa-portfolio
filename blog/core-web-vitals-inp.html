@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Core Web Vitals in 2026: why INP is the metric to fix first — Ajwa Malik</title>
+  <meta name="description" content="Interaction to Next Paint replaced First Input Delay and catches the slowness users actually feel. What causes poor INP and how to fix it." />
+  <link rel="canonical" href="https://www.ajwahmalik.site/blog/core-web-vitals-inp" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Core Web Vitals in 2026: why INP is the metric to fix first — Ajwa Malik" />
+  <meta property="og:description" content="Interaction to Next Paint replaced First Input Delay and catches the slowness users actually feel. What causes poor INP and how to fix it." />
+  <meta property="og:url" content="https://www.ajwahmalik.site/blog/core-web-vitals-inp" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23ff4f9a'/%3E%3C/svg%3E" />
+  <meta property="article:published_time" content="2026-09-26" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Core Web Vitals in 2026: why INP is the metric to fix first","description":"Interaction to Next Paint replaced First Input Delay and catches the slowness users actually feel. What causes poor INP and how to fix it.","datePublished":"2026-09-26","dateModified":"2026-09-26","author":{"@type":"Person","name":"Ajwa Malik","url":"https://www.ajwahmalik.site"},"mainEntityOfPage":"https://www.ajwahmalik.site/blog/core-web-vitals-inp","keywords":"Performance, Core Web Vitals, SEO"}</script>
+</head>
+<body data-page="post">
+  <main id="page">
+    <article>
+      <header class="page-head wrap post-head">
+        <a class="mono label post-back" href="/blog/">&larr; All posts</a>
+        <p class="mono post-meta" data-reveal>26 September 2026 · 6 min read · Performance · Core Web Vitals · SEO</p>
+        <h1 class="post-title" data-split>Core Web Vitals in 2026: why INP is the metric to fix first</h1>
+        <p class="lead case-sum" data-reveal>Interaction to Next Paint replaced First Input Delay and catches the slowness users actually feel. What causes poor INP and how to fix it.</p>
+      </header>
+      <div class="wrap post-layout">
+        <aside class="post-takeaways" data-reveal>
+          <p class="mono label">Key takeaways</p>
+          <ul><li>INP measures how quickly the page responds to every interaction, not just the first one. Aim for 200 ms or less.</li><li>Long JavaScript tasks are the main cause: heavy plugins, chat widgets, trackers and animation libraries running on the main thread.</li><li>Fix it by doing less work on interaction, breaking up long tasks and loading third-party scripts later.</li></ul>
+          <p class="post-author mono">By Ajwa Malik</p>
+        </aside>
+        <div class="prose">
+<p>Core Web Vitals are Google's measures of how a page feels to real visitors: how fast the main content appears (LCP), how much the layout jumps around (CLS) and how quickly the page responds when you interact with it (INP). In March 2024, Interaction to Next Paint replaced First Input Delay, and it is the one most sites now fail.</p>
+
+<h2>Why INP is harder than FID</h2>
+<p>First Input Delay only measured the delay before the browser started handling the first tap or click. A page could pass while every later interaction felt sluggish. INP looks at interactions across the whole visit and reports one of the slowest, from the click until the next frame is painted. It measures the slowness people actually notice: a menu that takes half a second to open, a filter that freezes the page, an "add to cart" that seems to do nothing.</p>
+<p>Google's thresholds: <strong>200 ms or less is good</strong>, up to 500 ms needs improvement, and anything slower is poor.</p>
+
+<h2>What usually causes poor INP</h2>
+<ul>
+  <li><strong>Long tasks on the main thread.</strong> Any JavaScript that runs for more than about 50 ms blocks the browser from responding.</li>
+  <li><strong>Third-party scripts.</strong> Chat widgets, heat maps, ad and tracking tags often run work on every interaction.</li>
+  <li><strong>Page builders and plugin stacks</strong> that attach many listeners and re-render large parts of the page.</li>
+  <li><strong>Heavy visual effects</strong> such as large blur filters or animating box shadows, which make every frame expensive to paint.</li>
+</ul>
+
+<h2>How I fix it</h2>
+<ol>
+  <li><strong>Measure field data first.</strong> Search Console's Core Web Vitals report and PageSpeed Insights show real-user INP. Lab tests alone miss it.</li>
+  <li><strong>Find the slow interaction.</strong> Record a performance trace in Chrome DevTools while clicking the slow element, and look for long tasks.</li>
+  <li><strong>Do less on interaction.</strong> Update the visible state first, then defer the expensive work.</li>
+  <li><strong>Break up long tasks</strong> so the browser can paint in between, and move heavy work off the main thread where you can.</li>
+  <li><strong>Load third parties later.</strong> Delay chat and tracking scripts until after the first interaction or when the browser is idle.</li>
+  <li><strong>Make effects cheap.</strong> Animate transforms and opacity, avoid repainting large blurred or shadowed areas on every frame, and pause animations that are off screen.</li>
+</ol>
+
+<h2>Do not forget LCP and CLS</h2>
+<ul>
+  <li><strong>LCP:</strong> serve the hero image in a modern format at the right size, preload it, and do not lazy-load what is above the fold.</li>
+  <li><strong>CLS:</strong> give images and embeds explicit width and height, and reserve space for banners before they load.</li>
+</ul>
+<p>On one clinic landing page, compressing images, deferring third-party scripts and trimming unused CSS took the desktop PageSpeed score to 97. On a surgeon's site, before-and-after galleries that were blank on phones came back after the sliders were initialised at the right moment and 3 MB images were compressed.</p>
+
+<h2>The takeaway</h2>
+<p>Good INP is mostly about restraint: less JavaScript running when people interact. Every script, widget and effect has a cost, and visitors pay it on every tap.</p>
+</div>
+      </div>
+    </article>
+    <a class="next-project wrap" href="/blog/ai-agents-in-production" data-cursor="Next">
+      <span class="mono label">Next post</span>
+      <span class="next-title">AI agents in production: let code measure and the model judge</span>
+    </a>
+  </main>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

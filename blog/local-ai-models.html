@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Running AI on your own machine: when a local model beats the cloud — Ajwa Malik</title>
+  <meta name="description" content="Small open models now run well on a laptop. Where they shine, where they fail, and how to design around their limits." />
+  <link rel="canonical" href="https://www.ajwahmalik.site/blog/local-ai-models" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Running AI on your own machine: when a local model beats the cloud — Ajwa Malik" />
+  <meta property="og:description" content="Small open models now run well on a laptop. Where they shine, where they fail, and how to design around their limits." />
+  <meta property="og:url" content="https://www.ajwahmalik.site/blog/local-ai-models" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23ff4f9a'/%3E%3C/svg%3E" />
+  <meta property="article:published_time" content="2026-09-30" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Running AI on your own machine: when a local model beats the cloud","description":"Small open models now run well on a laptop. Where they shine, where they fail, and how to design around their limits.","datePublished":"2026-09-30","dateModified":"2026-09-30","author":{"@type":"Person","name":"Ajwa Malik","url":"https://www.ajwahmalik.site"},"mainEntityOfPage":"https://www.ajwahmalik.site/blog/local-ai-models","keywords":"AI, Local LLMs, Privacy"}</script>
+</head>
+<body data-page="post">
+  <main id="page">
+    <article>
+      <header class="page-head wrap post-head">
+        <a class="mono label post-back" href="/blog/">&larr; All posts</a>
+        <p class="mono post-meta" data-reveal>30 September 2026 · 6 min read · AI · Local LLMs · Privacy</p>
+        <h1 class="post-title" data-split>Running AI on your own machine: when a local model beats the cloud</h1>
+        <p class="lead case-sum" data-reveal>Small open models now run well on a laptop. Where they shine, where they fail, and how to design around their limits.</p>
+      </header>
+      <div class="wrap post-layout">
+        <aside class="post-takeaways" data-reveal>
+          <p class="mono label">Key takeaways</p>
+          <ul><li>Local models are great for private, repetitive, bounded tasks: classification, extraction, summaries and voice.</li><li>Small models are poor judges. Give them yes-or-no questions and templates, not open-ended scoring.</li><li>Check that the model is really running on the GPU; under memory pressure it can silently fall back to the CPU.</li></ul>
+          <p class="post-author mono">By Ajwa Malik</p>
+        </aside>
+        <div class="prose">
+<p>A year ago, running a language model meant sending data to someone else's server. Today a small open model runs comfortably on a laptop, with no API bill, no rate limit and nothing leaving the machine. I run a voice assistant, an SEO monitoring system and a job-search pipeline on local models. Here is what I have learned about when that is the right choice.</p>
+
+<h2>Where local models shine</h2>
+<ul>
+  <li><strong>Privacy.</strong> Client documents, inboxes and voice never leave the device. For some clients this is the whole reason to use AI at all.</li>
+  <li><strong>Cost at volume.</strong> A job that runs every hour over thousands of items costs nothing extra.</li>
+  <li><strong>No quotas.</strong> No free-tier wall halfway through a run.</li>
+  <li><strong>Latency for voice.</strong> Wake word, speech-to-text, a small model and text-to-speech can all run on-device, quickly enough for a natural conversation.</li>
+</ul>
+
+<h2>Where they fail</h2>
+<p>Small models are confident and wrong in ways larger models usually are not. In my own tests, a three-billion-parameter model:</p>
+<ul>
+  <li>scored a perfect-match job 20 out of 100, with reasoning that contradicted itself;</li>
+  <li>invented employment history when asked to write a cover letter;</li>
+  <li>labelled bank promotions as job offers.</li>
+</ul>
+<p>None of this means local models are useless. It means you should not ask them for open-ended judgement.</p>
+
+<h2>Design around the limits</h2>
+<ul>
+  <li><strong>Ask binary questions.</strong> Replace "score this from 0 to 100" with five yes-or-no questions mapped to fixed points. Results became identical across repeated runs.</li>
+  <li><strong>Use templates.</strong> Let the model fill bounded slots in a fixed structure instead of writing freely.</li>
+  <li><strong>Gate before you ask.</strong> A cheap relevance filter in code stops irrelevant input from ever reaching the model.</li>
+  <li><strong>Keep maths in code.</strong> Anomaly detection, trends and scores are pure arithmetic; the model only writes the explanation.</li>
+  <li><strong>Retrieve, do not memorise.</strong> A small model plus a local vector store of the right documents beats a bigger model guessing from memory.</li>
+</ul>
+
+<h2>The hardware gotcha</h2>
+<p>On Apple silicon, local models run on the GPU and are fast. But when memory is tight, a model can quietly spill onto the CPU and become many times slower, with no error. Check what the runtime reports about where the model is loaded before you blame the model for being slow.</p>
+
+<h2>Choosing local or cloud</h2>
+<p>My rule of thumb: use a local model for private, repetitive and bounded work, and a frontier cloud model for hard reasoning, long documents and anything a customer reads directly. Many of my systems use both: local for the high-volume classification, cloud for the final write-up, each behind the same timeout and fallback.</p>
+</div>
+      </div>
+    </article>
+    <a class="next-project wrap" href="/blog/core-web-vitals-inp" data-cursor="Next">
+      <span class="mono label">Next post</span>
+      <span class="next-title">Core Web Vitals in 2026: why INP is the metric to fix first</span>
+    </a>
+  </main>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

@@ -30,6 +30,7 @@ function renderChrome() {
     ['Projects', '/projects.html'],
     ['SEO', '/seo.html'],
     ['Experience', '/experience.html'],
+    ['Blog', '/blog/'],
     ['About', '/about.html'],
     ['Contact', '/contact.html'],
   ];

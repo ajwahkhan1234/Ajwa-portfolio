@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI agents in production: let code measure and the model judge — Ajwa Malik</title>
+  <meta name="description" content="What actually breaks when an LLM agent leaves the demo and meets real users, and the architecture rule that fixes most of it." />
+  <link rel="canonical" href="https://www.ajwahmalik.site/blog/ai-agents-in-production" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="AI agents in production: let code measure and the model judge — Ajwa Malik" />
+  <meta property="og:description" content="What actually breaks when an LLM agent leaves the demo and meets real users, and the architecture rule that fixes most of it." />
+  <meta property="og:url" content="https://www.ajwahmalik.site/blog/ai-agents-in-production" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23ff4f9a'/%3E%3C/svg%3E" />
+  <meta property="article:published_time" content="2026-10-11" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"AI agents in production: let code measure and the model judge","description":"What actually breaks when an LLM agent leaves the demo and meets real users, and the architecture rule that fixes most of it.","datePublished":"2026-10-11","dateModified":"2026-10-11","author":{"@type":"Person","name":"Ajwa Malik","url":"https://www.ajwahmalik.site"},"mainEntityOfPage":"https://www.ajwahmalik.site/blog/ai-agents-in-production","keywords":"AI agents, LLMs, Architecture"}</script>
+</head>
+<body data-page="post">
+  <main id="page">
+    <article>
+      <header class="page-head wrap post-head">
+        <a class="mono label post-back" href="/blog/">&larr; All posts</a>
+        <p class="mono post-meta" data-reveal>11 October 2026 · 7 min read · AI agents · LLMs · Architecture</p>
+        <h1 class="post-title" data-split>AI agents in production: let code measure and the model judge</h1>
+        <p class="lead case-sum" data-reveal>What actually breaks when an LLM agent leaves the demo and meets real users, and the architecture rule that fixes most of it.</p>
+      </header>
+      <div class="wrap post-layout">
+        <aside class="post-takeaways" data-reveal>
+          <p class="mono label">Key takeaways</p>
+          <ul><li>Every number, score and fact should come from deterministic, tested code. The model plans, reads, classifies and writes.</li><li>Put every model call behind a timeout, validation and a fallback, so a bad output can never reach a user unchecked.</li><li>Rate limits, deprecated models and silent upstream changes are architecture problems, not prompt problems.</li></ul>
+          <p class="post-author mono">By Ajwa Malik</p>
+        </aside>
+        <div class="prose">
+<p>Agents are the most important shift in software this year. Instead of answering one prompt, a model now plans a task, calls tools, reads the results and decides what to do next. The demos are impressive. Production is a different story, and most of the trouble has nothing to do with how clever the model is.</p>
+<p>I build agents that run every day for real businesses: an SEO teardown agent that audits law-firm websites, a job-discovery pipeline, a multi-agent SEO monitoring system and a local voice assistant. Each one broke in production in a way the demo never showed. The fixes all pointed to the same rule.</p>
+
+<h2>The rule: code measures, the model judges</h2>
+<p>Language models are excellent at reading messy input, classifying it and writing clear text. They are unreliable at producing the same number twice. So I split every system along that line:</p>
+<ul>
+  <li><strong>Deterministic code</strong> crawls pages, counts things, runs checks and computes every score.</li>
+  <li><strong>The model</strong> plans which checks to run, interprets what they found and writes the explanation.</li>
+</ul>
+<p>When an early version of my SEO agent told a firm it had no attorney biographies, the firm had 47 of them. The model had sampled a handful of pages and drawn a confident conclusion. The fix was not a better prompt. I split "does it exist" checks, where every URL is classified by code, from "how good is it" checks, where the model reads a sample. The scoring itself moved entirely into code that the model cannot nudge.</p>
+
+<h2>What breaks first</h2>
+<h3>1. Quotas and rate limits</h3>
+<p>One agent run can make 15 to 20 model calls. On a free or low tier, the second run of the day dies halfway through. Treat the model like any other rate-limited API: a shared token bucket across all workers, exponential backoff on 429 responses, and a cheaper model alias for the steps that do not need the strongest one.</p>
+<h3>2. Models disappear</h3>
+<p>Providers retire model versions, sometimes only for new API keys. If the model name is hard-coded in five places, you find out from a user. Keep the model name in one config value, version your prompts alongside it, and have a fallback model ready.</p>
+<h3>3. Upstream data changes silently</h3>
+<p>My rank-tracking tool once reported that every site had dropped out of Google. Nothing had dropped. Google had changed its result links to opaque redirects, and the parser quietly found nothing. Now a run with zero organic results raises a hard error. If the outside world changes, the tool fails loudly instead of lying quietly.</p>
+<h3>4. Runaway tool calls and invented tools</h3>
+<p>Agents sometimes call tools that do not exist or loop on the same call. Validate every tool name against the real spec, cap the number of steps per run, and fall back to a plain chat answer when the plan goes off the rails.</p>
+
+<h2>Guard rails that pay for themselves</h2>
+<ul>
+  <li><strong>Timeouts with a null fallback.</strong> If the model is slow, the report ships without the advisory paragraph instead of blocking.</li>
+  <li><strong>Structured output, validated.</strong> Parse the model's JSON against a schema and reject anything that does not fit.</li>
+  <li><strong>Bounded writing.</strong> For anything sent to a person, such as a cover letter or an outreach email, use a template and let the model fill specific slots. It cannot invent a job history it was never given.</li>
+  <li><strong>Binary questions instead of free scores.</strong> A small local model gave a perfect-match job 20 out of 100. Five yes-or-no questions mapped to fixed points gave identical results across repeated trials.</li>
+  <li><strong>Dry-run by default, daily caps and a kill switch</strong> for anything that acts in the outside world.</li>
+</ul>
+
+<h2>The takeaway</h2>
+<p>The teams getting real value from agents are not the ones with the cleverest prompts. They are the ones who decided early which parts of the system must be exact and kept the model away from those parts. Let the model do what it is good at, judgement and language, and let code do the rest.</p>
+</div>
+      </div>
+    </article>
+    <a class="next-project wrap" href="/blog/seo-for-ai-search" data-cursor="Next">
+      <span class="mono label">Next post</span>
+      <span class="next-title">SEO for AI search: how to get cited in AI Overviews and answer engines</span>
+    </a>
+  </main>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

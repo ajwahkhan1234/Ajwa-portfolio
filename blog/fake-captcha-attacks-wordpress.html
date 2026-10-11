@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The fake CAPTCHA attacks hitting WordPress sites, and how to stop them — Ajwa Malik</title>
+  <meta name="description" content="ClickFix and blockchain-hosted loaders turned hacked WordPress sites into malware traps. How the attack works, how to find it and how to harden a site." />
+  <link rel="canonical" href="https://www.ajwahmalik.site/blog/fake-captcha-attacks-wordpress" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="The fake CAPTCHA attacks hitting WordPress sites, and how to stop them — Ajwa Malik" />
+  <meta property="og:description" content="ClickFix and blockchain-hosted loaders turned hacked WordPress sites into malware traps. How the attack works, how to find it and how to harden a site." />
+  <meta property="og:url" content="https://www.ajwahmalik.site/blog/fake-captcha-attacks-wordpress" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23ff4f9a'/%3E%3C/svg%3E" />
+  <meta property="article:published_time" content="2026-10-04" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"The fake CAPTCHA attacks hitting WordPress sites, and how to stop them","description":"ClickFix and blockchain-hosted loaders turned hacked WordPress sites into malware traps. How the attack works, how to find it and how to harden a site.","datePublished":"2026-10-04","dateModified":"2026-10-04","author":{"@type":"Person","name":"Ajwa Malik","url":"https://www.ajwahmalik.site"},"mainEntityOfPage":"https://www.ajwahmalik.site/blog/fake-captcha-attacks-wordpress","keywords":"Security, WordPress, Malware"}</script>
+</head>
+<body data-page="post">
+  <main id="page">
+    <article>
+      <header class="page-head wrap post-head">
+        <a class="mono label post-back" href="/blog/">&larr; All posts</a>
+        <p class="mono post-meta" data-reveal>4 October 2026 · 8 min read · Security · WordPress · Malware</p>
+        <h1 class="post-title" data-split>The fake CAPTCHA attacks hitting WordPress sites, and how to stop them</h1>
+        <p class="lead case-sum" data-reveal>ClickFix and blockchain-hosted loaders turned hacked WordPress sites into malware traps. How the attack works, how to find it and how to harden a site.</p>
+      </header>
+      <div class="wrap post-layout">
+        <aside class="post-takeaways" data-reveal>
+          <p class="mono label">Key takeaways</p>
+          <ul><li>The fake &quot;verify you are human&quot; box asks visitors to paste a command. The site is the bait; the visitor is the target.</li><li>Payloads now hide in the database, in mu-plugins, in fake plugins and even on public blockchains, so file scanning alone misses them.</li><li>Reset every admin password, audit users, remove what you do not recognise and lock file permissions after any clean-up.</li></ul>
+          <p class="post-author mono">By Ajwa Malik</p>
+        </aside>
+        <div class="prose">
+<p>The most damaging attack I have cleaned up this year does not deface a website or steal its database. It turns the site into a trap for its own visitors. A fake CAPTCHA appears, says "verify you are human", and tells the visitor to press a key combination and paste a command. That command installs malware on their computer. Security researchers call this pattern ClickFix.</p>
+<p>I have removed versions of it from law-firm, finance and small-business WordPress sites on four different hosts. Here is how it works and how to stop it.</p>
+
+<h2>How the attack works</h2>
+<ol>
+  <li><strong>Access.</strong> Attackers get in through a stolen admin password, a vulnerable plugin or a weak hosting account.</li>
+  <li><strong>Persistence.</strong> They plant several ways back in: a hidden admin user, a backdoor file in uploads, a fake plugin with a believable name, or a drop-in such as <code>wp-content/db.php</code> that loads before WordPress itself.</li>
+  <li><strong>Injection.</strong> A small loader script is added to pages, often stored in the database rather than in a file.</li>
+  <li><strong>The trap.</strong> The loader fetches the fake CAPTCHA and the command it asks visitors to run.</li>
+</ol>
+
+<h2>Why it is hard to find</h2>
+<p>Older malware lived in files, so a file scanner could find it. These campaigns spread out:</p>
+<ul>
+  <li><strong>Database options and post meta</strong> hold the payload, sometimes with innocent-looking names.</li>
+  <li><strong>Must-use plugins</strong> load automatically and do not appear in the normal plugin list.</li>
+  <li><strong>Blockchain hosting.</strong> Some loaders fetch their next stage from a smart contract on a public blockchain. There is no server to take down, and the attacker can change the payload whenever they like. This technique is known as EtherHiding.</li>
+  <li><strong>Visitor targeting.</strong> The trap may only show to first-time visitors or to Windows users, so the owner logged in on a Mac never sees it.</li>
+</ul>
+
+<h2>How to check your site</h2>
+<ul>
+  <li>Open the site in a private window on a different device, and look for any "verify you are human" prompt you did not add.</li>
+  <li>List every administrator account and remove the ones nobody recognises.</li>
+  <li>Look in <code>wp-content/mu-plugins</code> and for a <code>db.php</code> or <code>object-cache.php</code> you did not install.</li>
+  <li>Compare WordPress core files with the official release; any difference is suspicious.</li>
+  <li>Search the database options table for long encoded strings and unfamiliar script URLs.</li>
+</ul>
+
+<h2>Cleaning up properly</h2>
+<p>Removing the visible script is not a clean-up. If the backdoor stays, the site is reinfected within days. I have seen it happen. A real clean-up:</p>
+<ol>
+  <li>Takes a full backup first, then works from a copy.</li>
+  <li>Removes every persistence point: users, files, drop-ins, mu-plugins and database payloads.</li>
+  <li>Replaces core files with clean copies and reinstalls plugins from official sources.</li>
+  <li>Resets every password: WordPress admins, hosting, FTP, database and email.</li>
+  <li>Deletes any public backup or database dump left in the web root.</li>
+</ol>
+
+<h2>Hardening that actually helps</h2>
+<ul>
+  <li>Two-factor authentication for every admin account.</li>
+  <li>Disable file editing in the dashboard and lock permissions on custom code.</li>
+  <li>Remove abandoned plugins. Most infections I see start with one nobody remembered was installed.</li>
+  <li>Block username enumeration and limit login attempts.</li>
+  <li>Monitor: a scheduled check that alerts on new admin users, changed core files and new scripts in the page source.</li>
+</ul>
+<p>I packaged these checks into a WordPress plugin, Inovista Shield, after the same malware families kept coming back across client sites. Whatever tool you use, the principle is the same: assume the attacker left more than one door open, and close them all.</p>
+</div>
+      </div>
+    </article>
+    <a class="next-project wrap" href="/blog/local-ai-models" data-cursor="Next">
+      <span class="mono label">Next post</span>
+      <span class="next-title">Running AI on your own machine: when a local model beats the cloud</span>
+    </a>
+  </main>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
