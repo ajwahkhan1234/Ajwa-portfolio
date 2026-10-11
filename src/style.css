@@ -545,8 +545,48 @@ main > .intro::before { content: ''; position: absolute; inset: -60px 0 auto; he
 .prose strong { font-weight: 600; }
 .prose code { font: 0.86em var(--mono); background: rgba(255, 79, 154, 0.12); padding: 0.1em 0.4em; border-radius: 4px; }
 
+/* ---------- About: stats, New York, journey ---------- */
+.about-actions { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; margin-top: 36px; }
+.about-stats { padding-bottom: clamp(80px, 10vw, 140px); }
+.about-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); }
+.about-stats-grid > div { display: grid; gap: 10px; padding: 28px 24px 0 0; }
+.about-stats-grid strong { font-size: clamp(48px, 6vw, 96px); font-weight: 500; letter-spacing: -0.05em; line-height: 0.9; }
+.about-stats-grid .mono { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; max-width: 22ch; }
+main > section.ny { background: var(--night); color: #f6eef2; overflow: hidden; }
+.ny-inner { position: relative; padding-block: clamp(96px, 12vw, 180px) clamp(40px, 6vw, 80px); }
+.ny .label { color: var(--accent); }
+.ny-title { margin: 12px 0 clamp(40px, 6vw, 80px); font-size: clamp(56px, 10vw, 168px); font-weight: 500; letter-spacing: -0.06em; line-height: 0.88; }
+.ny-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+.ny-copy p { margin: 0 0 1.2em; color: rgba(246, 238, 242, 0.7); max-width: 56ch; font-size: 18px; line-height: 1.6; }
+.ny-copy .ny-lead { color: #f6eef2; font-size: clamp(22px, 2.2vw, 30px); line-height: 1.3; letter-spacing: -0.02em; }
+.ny-plan { padding: 28px; border: 1px solid rgba(246, 238, 242, 0.14); border-radius: 14px; background: rgba(255, 255, 255, 0.03); }
+.ny-plan .label { margin: 0 0 16px; }
+.ny-plan ol { margin: 0; padding: 0; list-style: none; counter-reset: plan; display: grid; gap: 16px; }
+.ny-plan li { counter-increment: plan; position: relative; padding-left: 40px; font-size: 16px; line-height: 1.5; color: rgba(246, 238, 242, 0.75); }
+.ny-plan li::before { content: counter(plan, decimal-leading-zero); position: absolute; left: 0; top: 3px; font: 500 12px var(--mono); color: var(--accent); }
+.ny-plan strong { color: #f6eef2; font-weight: 600; }
+.ny-plan a { color: var(--accent); }
+.ny-cta { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; margin-top: clamp(56px, 7vw, 96px); padding-top: 28px; border-top: 1px solid rgba(246, 238, 242, 0.14); }
+.ny-cta p { margin: 0; font-size: clamp(20px, 2vw, 28px); letter-spacing: -0.02em; }
+.ny-cta-links { display: flex; align-items: center; gap: 28px; }
+.btn-accent { background: var(--accent); color: #fff; border-color: var(--accent); }
+.ny-skyline { margin: clamp(48px, 7vw, 96px) 0 0; font: 600 clamp(64px, 17vw, 300px)/0.8 var(--sans); letter-spacing: -0.06em; white-space: nowrap; color: transparent; -webkit-text-stroke: 1px rgba(255, 79, 154, 0.35); }
+.journey { padding-block: clamp(96px, 12vw, 180px); }
+.journey-list { list-style: none; margin: 24px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.journey-list li { background: var(--bg); padding: 24px; display: grid; gap: 10px; align-content: start; min-height: 220px; transition: background 0.5s var(--ease); }
+.journey-list li:hover { background: #fff; }
+.journey-list .mono { color: var(--accent); font-size: 12px; }
+.journey-list h3 { margin: 0; font-size: 22px; font-weight: 500; letter-spacing: -0.02em; }
+.journey-list p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.5; }
+.journey-list .is-next { background: var(--accent); color: #fff; }
+.journey-list .is-next .mono, .journey-list .is-next p { color: rgba(255, 255, 255, 0.85); }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
+  .about-stats-grid { grid-template-columns: 1fr 1fr; row-gap: 32px; }
+  .ny-grid { grid-template-columns: 1fr; }
+  .journey-list { grid-template-columns: 1fr; }
+  .journey-list li { min-height: 0; }
   .post-list { grid-template-columns: 1fr; }
   .post-layout { grid-template-columns: 1fr; }
   .post-takeaways { position: static; }
