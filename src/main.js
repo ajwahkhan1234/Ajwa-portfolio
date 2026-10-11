@@ -193,7 +193,42 @@ function initHero(lenis) {
       .set('.hero-case', { clearProps: 'clipPath' });
   }
 
+  initHeroPointer(hero);
   initHeroPin();
+}
+
+/* Cursor light: a pink spotlight follows the pointer, dots light up beneath it, and the background drifts the other way. */
+function initHeroPointer(hero) {
+  if (reduced || !fine) return;
+  const spot = hero.querySelector('.hero-spot');
+  const dots = hero.querySelector('.hero-dots');
+  const bg = hero.querySelector('.hero-bg');
+  const sx = gsap.quickTo(spot, 'x', { duration: 0.8, ease: 'power3' });
+  const sy = gsap.quickTo(spot, 'y', { duration: 0.8, ease: 'power3' });
+  const bx = gsap.quickTo(bg, 'x', { duration: 1.6, ease: 'power3' });
+  const by = gsap.quickTo(bg, 'y', { duration: 1.6, ease: 'power3' });
+  const m = { x: innerWidth / 2, y: innerHeight * 0.4 };
+  const d = { x: m.x, y: m.y };
+  gsap.set(spot, { x: m.x, y: m.y });
+  hero.addEventListener('pointermove', (e) => {
+    const r = hero.getBoundingClientRect();
+    m.x = e.clientX - r.left;
+    m.y = e.clientY - r.top;
+    sx(m.x);
+    sy(m.y);
+    bx((0.5 - m.x / r.width) * 40);
+    by((0.5 - m.y / r.height) * 30);
+  });
+  // Ease the dot mask toward the pointer; skip work once it has settled or the hero is off screen.
+  gsap.ticker.add(() => {
+    if (scrollY > innerHeight) return;
+    const dx = m.x - d.x, dy = m.y - d.y;
+    if (Math.abs(dx) + Math.abs(dy) < 0.5) return;
+    d.x += dx * 0.12;
+    d.y += dy * 0.12;
+    dots.style.setProperty('--mx', `${d.x}px`);
+    dots.style.setProperty('--my', `${d.y}px`);
+  });
 }
 
 /* The hero holds still and recedes while the next section slides up over it. */
