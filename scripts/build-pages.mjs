@@ -97,7 +97,7 @@ for (const [i, p] of sorted.entries()) {
         <div class="prose">${p.body}</div>
       </div>
     </article>
-    <a class="next-project wrap" href="/blog/${next.slug}" data-cursor="Next">
+    <a class="next-project next-post wrap" href="/blog/${next.slug}" data-cursor="Next">
       <span class="mono label">Next post</span>
       <span class="next-title">${esc(next.title)}</span>
     </a>
