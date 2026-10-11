@@ -346,7 +346,13 @@ function initMagnetic() {
 // Curtain wipe between pages: cover on leave, uncover on load.
 function initTransitions(uncover) {
   const curtain = document.querySelector('.curtain');
-  if (uncover) gsap.fromTo(curtain, { yPercent: 0 }, { yPercent: -100, duration: 0.9, ease: 'expo.inOut', delay: 0.05 });
+  // Browsers with cross-document view transitions animate page changes natively (see style.css),
+  // straight from the old page's snapshot to the new one, without waiting for this script.
+  if ('CSSViewTransitionRule' in window || reduced) {
+    gsap.set(curtain, { yPercent: -100 });
+    return;
+  }
+  if (uncover) gsap.fromTo(curtain, { yPercent: 0 }, { yPercent: -100, duration: 0.6, ease: 'expo.inOut' });
   else gsap.set(curtain, { yPercent: -100 });
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a');
@@ -354,10 +360,32 @@ function initTransitions(uncover) {
     const url = new URL(a.href, location.href);
     if (url.origin !== location.origin || url.href === location.href || a.getAttribute('href').startsWith('mailto:')) return;
     e.preventDefault();
-    gsap.fromTo(curtain, { yPercent: 100 }, { yPercent: 0, duration: 0.7, ease: 'expo.inOut', onComplete: () => (location.href = url.href) });
+    gsap.fromTo(curtain, { yPercent: 100 }, { yPercent: 0, duration: 0.45, ease: 'expo.in', onComplete: () => (location.href = url.href) });
   });
   // Restore from bfcache without the curtain stuck down.
   addEventListener('pageshow', (e) => e.persisted && gsap.set(curtain, { yPercent: -100 }));
+}
+
+/* Fetch same-site pages in the background as soon as a link is hovered, so the next page is already loaded. */
+function initPrefetch() {
+  if (HTMLScriptElement.supports?.('speculationrules')) {
+    const rules = document.createElement('script');
+    rules.type = 'speculationrules';
+    rules.textContent = JSON.stringify({ prefetch: [{ where: { href_matches: '/*' }, eagerness: 'moderate' }] });
+    document.head.append(rules);
+    return;
+  }
+  const done = new Set();
+  const warm = (e) => {
+    const a = e.target.closest?.('a[href]');
+    if (!a || a.target === '_blank') return;
+    const url = new URL(a.href, location.href);
+    if (url.origin !== location.origin || done.has(url.pathname)) return;
+    done.add(url.pathname);
+    document.head.append(Object.assign(document.createElement('link'), { rel: 'prefetch', href: url.href }));
+  };
+  addEventListener('pointerover', warm, { passive: true });
+  addEventListener('touchstart', warm, { passive: true });
 }
 
 function runPreloader() {
@@ -668,6 +696,7 @@ async function boot() {
   initMagnetic();
   const preloaded = await runPreloader();
   initTransitions(!preloaded && !reduced);
+  initPrefetch();
   initReveals();
   fx.initScrubText();
   fx.initExpand();
