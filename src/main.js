@@ -45,7 +45,7 @@ function renderChrome() {
        <nav class="header-nav mono">${nav.slice(1).map(([l, h]) => `<a href="${h}">${l}</a>`).join('')}</nav>
        <button class="menu-btn mono" aria-expanded="false" aria-controls="menu"><span>Menu</span><i></i><i></i></button>
      </header>
-     <div class="menu" id="menu" hidden>
+     <div class="menu" id="menu" data-lenis-prevent hidden>
        <nav>${nav.map(([l, h], i) => `<a href="${h}"><span class="mono">0${i + 1}</span>${l}</a>`).join('')}</nav>
        <div class="menu-foot mono"><a data-email></a><span>${socials.map((s) => `<a href="${s.url}" target="_blank" rel="noopener">${s.label}</a>`).join(' ')}</span></div>
      </div>`
