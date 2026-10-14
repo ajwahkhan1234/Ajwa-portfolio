@@ -1,17 +1,4 @@
 {
- "quantum": {
-  "cover": "/work/quantum/cover.webp",
-  "gallery": [
-   "/work/quantum/screen.webp",
-   "/work/quantum/extra-1.webp",
-   "/work/quantum/extra-2.webp",
-   "/work/quantum/extra-3.webp",
-   "/work/quantum/extra-4.webp",
-   "/work/quantum/extra-5.webp",
-   "/work/quantum/extra-6.webp"
-  ],
-  "mobile": "/work/quantum/mobile.webp"
- },
  "kendall-law": {
   "cover": "/work/kendall-law/cover.webp",
   "gallery": [

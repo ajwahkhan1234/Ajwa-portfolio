@@ -66,7 +66,7 @@ const seoProjects = Object.values(seoFiles)
   }));
 
 // Home gallery shows these, in this order.
-const featured = ['kincer-chassis', 'quantum', 'route72', 'blanks-boutique', 'kendall-law', 'le-crazy-dubai', 'bfp-law-firm', 'paypoint'];
+const featured = ['kincer-chassis', 'huddle', 'route72', 'blanks-boutique', 'kendall-law', 'le-crazy-dubai', 'bfp-law-firm', 'paypoint'];
 
 export const categories = ['SEO', 'Web app', 'Website', 'WordPress', 'Site care', 'Concept', 'Tool'];
 
@@ -94,7 +94,7 @@ export const experience = [
     company: 'Skanska', logo: '/logos/skanska.webp', bg: '#143275', role: 'Senior Shopify / Full-Stack Developer',
     dates: 'Jun 2026 – Present', place: 'Los Angeles, USA · Remote',
     points: [
-      'Architected and delivered Quantum, the company’s multi-state tax platform: sales/use tax, excise and PACT Act returns for 85 registrations across 33 states.',
+      'Architected and delivered the company’s multi-state tax platform: sales/use tax, excise and PACT Act returns for 85 registrations across 33 states.',
       'Built store connectors for 8 commerce platforms behind one normalizer, with OAuth, encrypted credentials and a one-click WooCommerce pairing plugin.',
       'Backed tax lookups with a 59,600-row US jurisdiction directory and a daily sync cron, tested against in-process Postgres.',
     ],

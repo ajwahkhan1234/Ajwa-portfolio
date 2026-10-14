@@ -4,24 +4,6 @@
 export const builtProjects = [
   // ---------- Web apps ----------
   {
-    slug: 'quantum',
-    title: 'Quantum',
-    client: 'Skanska',
-    category: 'Web app',
-    year: '2026',
-    role: 'Full-stack developer',
-    stack: ['Next.js', 'Neon Postgres', 'Drizzle', 'Vercel'],
-    colors: ['#6d3cff', '#c9b8ff', '#0d0820'],
-    mark: 'Q',
-    summary: 'Multi-state sales and excise tax automation for a multi-state distributor, with store connectors and a marketplace.',
-    challenge:
-      'The distributor files sales and excise tax in more than 40 states, each with its own forms, filing frequency and rules. The work lived in spreadsheets and Avalara exports.',
-    solution:
-      'A rules engine that groups sales by state and tax type, computes each return and tracks what is due. Connectors pull orders from eight commerce platforms, a WooCommerce plugin pairs with one button, and a 59,600-row US jurisdiction directory backs address lookups.',
-    features: ['Per-state, per-tax-type filing calendar', 'Connectors for 8 commerce platforms plus a push API', 'WooCommerce plugin with one-button pairing', 'Editable, effective-dated rates and rules'],
-    url: '',
-  },
-  {
     slug: 'kendall-law',
     title: 'Kendall Law Resource Hub',
     client: 'Kendall Law, USA',

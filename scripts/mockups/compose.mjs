@@ -23,9 +23,6 @@ const extras = {
   'blue-clover': [`${home}/blue-clover-build/test/shots-img/about-1440-elementor.png`, `${home}/blue-clover-build/test/shots-img/journal-1440-elementor.png`],
   'custom-product-filter': [],
   // Real app screens from the promo-video captures.
-  quantum: ['imac-products', 'imac-months-aug-2026', 'imac-state-ca', 'imac-quarterly-annual', 'imac-return-in-annual', 'imac-upload'].map(
-    (n) => `${home}/maxvapor-tax/brag-output-2026-09-26-202649/composition/assets/screens/${n}.png`
-  ),
   paypoint: ['clock', 'roster', 'team-map', 'timesheets', 'notes', 'weekend', 'summary'].map((n) => path.join(root, `scripts/mockups/extra/paypoint-${n}.png`)),
 };
 const uri = async (file, width) => 'data:image/jpeg;base64,' + (await sharp(file).resize({ width, withoutEnlargement: true }).jpeg({ quality: 88 }).toBuffer()).toString('base64');
