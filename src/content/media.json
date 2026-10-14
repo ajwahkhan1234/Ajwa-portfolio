@@ -95,13 +95,6 @@
   ],
   "mobile": "/work/mirdef-shipping/mobile.webp"
  },
- "driverite-autos": {
-  "cover": "/work/driverite-autos/cover.webp",
-  "gallery": [
-   "/work/driverite-autos/screen.webp"
-  ],
-  "mobile": "/work/driverite-autos/mobile.webp"
- },
  "skin-artistry": {
   "cover": "/work/skin-artistry/cover.webp",
   "gallery": [
@@ -136,27 +129,6 @@
    "/work/inovista-plugin-store/screen.webp"
   ],
   "mobile": "/work/inovista-plugin-store/mobile.webp"
- },
- "mia-vapes": {
-  "cover": "/work/mia-vapes/cover.webp",
-  "gallery": [
-   "/work/mia-vapes/screen.webp"
-  ],
-  "mobile": "/work/mia-vapes/mobile.webp"
- },
- "redhawk-vapes": {
-  "cover": "/work/redhawk-vapes/cover.webp",
-  "gallery": [
-   "/work/redhawk-vapes/screen.webp"
-  ],
-  "mobile": "/work/redhawk-vapes/mobile.webp"
- },
- "suorin-usa": {
-  "cover": "/work/suorin-usa/cover.webp",
-  "gallery": [
-   "/work/suorin-usa/screen.webp"
-  ],
-  "mobile": "/work/suorin-usa/mobile.webp"
  },
  "snack-shack": {
   "cover": "/work/snack-shack/cover.webp",
@@ -401,13 +373,6 @@
   "cover": "/work/americourt-hotels/cover.webp",
   "gallery": [],
   "typographic": true
- },
- "vape-closeouts": {
-  "cover": "/work/vape-closeouts/cover.webp",
-  "gallery": [
-   "/work/vape-closeouts/screen.webp"
-  ],
-  "mobile": "/work/vape-closeouts/mobile.webp"
  },
  "cmsc": {
   "cover": "/work/cmsc/cover.webp",

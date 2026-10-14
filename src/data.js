@@ -66,7 +66,7 @@ const seoProjects = Object.values(seoFiles)
   }));
 
 // Home gallery shows these, in this order.
-const featured = ['kincer-chassis', 'quantum', 'route72', 'blanks-boutique', 'kendall-law', 'le-crazy-dubai', 'bfp-law-firm', 'driverite-autos'];
+const featured = ['kincer-chassis', 'quantum', 'route72', 'blanks-boutique', 'kendall-law', 'le-crazy-dubai', 'bfp-law-firm', 'paypoint'];
 
 export const categories = ['SEO', 'Web app', 'Website', 'WordPress', 'Site care', 'Concept', 'Tool'];
 
@@ -91,15 +91,12 @@ export const experience = [
     ],
   },
   {
-    company: 'Maximum Vapor', logo: '/logos/maximum-vapor.svg', logo2: '/logos/vape-closeouts.webp', dark: true, role: 'Senior Shopify / Full-Stack Developer',
+    company: 'Skanska', logo: '/logos/skanska.webp', bg: '#143275', role: 'Senior Shopify / Full-Stack Developer',
     dates: 'Jun 2026 – Present', place: 'Los Angeles, USA · Remote',
     points: [
-      'Architected and delivered Quantum, the company’s multi-state tax platform: sales/use tax, vapor excise and PACT Act returns for 85 registrations across 33 states.',
+      'Architected and delivered Quantum, the company’s multi-state tax platform: sales/use tax, excise and PACT Act returns for 85 registrations across 33 states.',
       'Built store connectors for 8 commerce platforms behind one normalizer, with OAuth, encrypted credentials and a one-click WooCommerce pairing plugin.',
-      'Shopify storefronts, a React homepage redesign with a compliance age gate, and technical SEO for Vape Closeouts and MIA Tyson Vape Deals.',
-      'Grew Vape Closeouts to 161K impressions and 3.32K organic clicks in three months, and took MIA Tyson Vape Deals from no rankings to 11.5K impressions.',
       'Backed tax lookups with a 59,600-row US jurisdiction directory and a daily sync cron, tested against in-process Postgres.',
-      'Imported Shopify order history as PACT Act shipment records, and redesigned the RedHawk and Suorin USA storefronts.',
     ],
   },
   {

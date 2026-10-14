@@ -602,7 +602,7 @@ function projectPage() {
 
 function expRow(e, i, full) {
   return `<article class="exp" data-reveal>
-    <div class="exp-logo${e.dark ? ' is-dark' : ''}"><img src="${e.logo}" alt="${esc(e.company)} logo" loading="lazy">${e.logo2 ? `<img src="${e.logo2}" alt="Vape Closeouts logo" loading="lazy">` : ''}</div>
+    <div class="exp-logo${e.dark ? ' is-dark' : ''}"${e.bg ? ` style="background:${e.bg};border-color:${e.bg}"` : ''}><img src="${e.logo}" alt="${esc(e.company)} logo" loading="lazy">${e.logo2 ? `<img src="${e.logo2}" alt="" loading="lazy">` : ''}</div>
     <div class="exp-main">
       <p class="mono exp-dates">${esc(e.dates)}</p>
       <h3>${esc(e.role)}</h3>
